@@ -8,6 +8,10 @@ export default function Home() {
         { name: "Bebidas", image: "https://www.sabornamesa.com.br/media/k2/items/cache/bf1e20a4462b71e3cc4cece2a8c96ac8_XL.jpg" },
         { name: "Sobremesas", image: "https://www.sabornamesa.com.br/media/k2/items/cache/bf1e20a4462b71e3cc4cece2a8c96ac8_XL.jpg" }
     ]
+
+    const food = [
+
+    ]
     return (
         <Container>
             <Search>
@@ -29,7 +33,62 @@ export default function Home() {
             </Categories>
 
             <Foods>
-
+                <ContainerFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                </ContainerFood>
+                <ContainerFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                </ContainerFood>
+                <ContainerFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                </ContainerFood>
+                <ContainerFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                    <BoxFood>
+                        <div></div>
+                    </BoxFood>
+                </ContainerFood>
             </Foods>
 
             <Check>
@@ -55,7 +114,11 @@ const Categories = styled.div`
     }
 `
 
-const Foods = styled.div``
+const Foods = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
 
 const Check = styled.div``
 
@@ -69,5 +132,32 @@ const Box = styled.div`
     align-items: center;
     img{
         width: 100px;
+    }
+`
+
+const ContainerFood = styled.div`
+    width: 100%;
+    height: 280px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+`
+
+const BoxFood = styled.div`
+    width: 200px;
+    height: 250px;
+    background-image: url("https://i.pinimg.com/564x/ed/8b/88/ed8b88902879404786c7144acf631aad.jpg");
+    background-size: contain;
+    position: relative;
+    div{
+        background-color: #FFFFFF;
+        width: 100%;
+        height: 65%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
+
     }
 `
