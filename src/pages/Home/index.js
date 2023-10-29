@@ -102,9 +102,26 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 90%;
+    margin: 0 auto;
+    padding: 2%;
 `
 
-const Search = styled.div``
+const Search = styled.div`
+    height: 70px;
+    h1{
+        font-weight: 700;
+        font-size: 30px;
+    }
+    input{
+        margin: 10px 0;
+        background-color: #e8e6e6;
+        border: 0;
+        outline: 0;
+        width: 280px;
+        height: 30px;
+        padding-left: 10px;
+    }
+`
 
 const Categories = styled.div`
     display:flex;
