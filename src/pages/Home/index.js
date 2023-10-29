@@ -1,16 +1,15 @@
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 
 export default function Home() {
 
+    const [food, setFood] = useState()
+
     const category = [
         { name: "Combos", image: "https://www.incrivel.com/_next/image/?url=https%3A%2F%2Fincrivel-prd.adtsys.com.br%2Fwp-content%2Fuploads%2F2022%2F11%2Fburger_carne_incri%CC%81vel.png&w=828&q=75" },
-        { name: "Acompanhamentos", image: "https://www.sabornamesa.com.br/media/k2/items/cache/bf1e20a4462b71e3cc4cece2a8c96ac8_XL.jpg" },
-        { name: "Bebidas", image: "https://www.sabornamesa.com.br/media/k2/items/cache/bf1e20a4462b71e3cc4cece2a8c96ac8_XL.jpg" },
-        { name: "Sobremesas", image: "https://www.sabornamesa.com.br/media/k2/items/cache/bf1e20a4462b71e3cc4cece2a8c96ac8_XL.jpg" }
-    ]
-
-    const food = [
-
+        { name: "Acompanhamentos", image: "https://acdn.mitiendanube.com/stores/690/117/products/batatablacknovo01-com-batata1-1b7acadeecc786836815623317173381-640-0.webp" },
+        { name: "Bebidas", image: "https://tb0932.vtexassets.com/arquivos/ids/165092-1600-auto?v=638131052363530000&width=1600&height=auto&aspect=true" },
+        { name: "Sobremesas", image: "https://img.freepik.com/fotos-premium/uma-sobremesa-com-uma-colher-marrom-em-um-prato-com-fundo-branco_391229-6166.jpg?w=826" }
     ]
     return (
         <Container>
@@ -108,6 +107,7 @@ const Container = styled.div`
 
 const Search = styled.div`
     height: 70px;
+    margin-bottom: 40px;
     h1{
         font-weight: 700;
         font-size: 30px;
@@ -124,10 +124,20 @@ const Search = styled.div`
 `
 
 const Categories = styled.div`
-    display:flex;
+    display: flex;
     flex-direction: column;
-    div{
+    width: 100%;
+    h2{
+        font-weight: 700;
+    }
+    p{
+        font-weight: 100;
+        margin-bottom: 10px;
+    }
+    >div{
         display: flex;
+        flex-direction: row;
+        justify-content: space-around;
     }
 `
 
@@ -140,13 +150,15 @@ const Foods = styled.div`
 const Check = styled.div``
 
 const Box = styled.div`
-    width: 200px;
-    height: 200px;
-    box-shadow: 1px 1px 5px #ccc;
+    width: 220px;
+    height: 160px;
+    box-shadow: 1px 1px 10px #ccc;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
     img{
         width: 100px;
     }
