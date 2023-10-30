@@ -1,15 +1,16 @@
 import styled from "styled-components"
 import { IoMdAdd } from "react-icons/io"
 import { GrFormSubtract } from "react-icons/gr"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import OptionsAdditional from "./Additional"
 import InfosRequest from "./Resume"
+import Current from "../Context/Current"
 
 export function ConfirmOrder({ product, setSelectFood }) {
 
-    const [current, setCurrent] = useState(1)
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [totalAdds, setTotalAdds] = useState(0)
+    const { current, setCurrent } = useContext(Current)
 
     function alterCurrent(op) {
         if (op !== "sub") {
@@ -49,7 +50,7 @@ export function ConfirmOrder({ product, setSelectFood }) {
                     <textarea placeholder="Adicione uma observação ao pedido" />
                 </Obs>
 
-                <InfosRequest current={current} product={product} totalAdds={totalAdds} />
+                <InfosRequest product={product} totalAdds={totalAdds} />
 
             </Order>
         </Overlay>

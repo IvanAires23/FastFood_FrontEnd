@@ -1,6 +1,10 @@
+import { useContext } from "react"
 import styled from "styled-components"
+import Current from "../Context/Current"
 
-export default function InfosRequest({ current, product, totalAdds }) {
+export default function InfosRequest({ product, totalAdds }) {
+
+    const { current } = useContext(Current)
 
     return (
         <Resume>

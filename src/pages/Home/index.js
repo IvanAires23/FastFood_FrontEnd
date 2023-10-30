@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 import ContainerFood from "../../Components/Foods.js"
 import { ConfirmOrder } from "../../Components/ConfirmOrder.js"
+import InfosRequest from "../../Components/Resume.js"
 
 export default function Home() {
 
@@ -75,10 +76,15 @@ export default function Home() {
                     <ContainerFood setSelectFood={setSelectFood} category={drinks} />
                     <ContainerFood setSelectFood={setSelectFood} category={desserts} />
                 </Products>
+                <Resume>
+                    <InfosRequest product={selectFood} />
+                </Resume>
             </Menu>
         </Container>
     )
 }
+
+const Resume = styled.div``
 
 const Container = styled.div`
     display: flex;
