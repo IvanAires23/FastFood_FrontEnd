@@ -1,108 +1,97 @@
+import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import ContainerFood from "../../Components/Foods.js"
+import { ConfirmOrder } from "../../Components/ConfirmOrder.js"
 
 export default function Home() {
 
-    const [food, setFood] = useState()
+    const [food, setFood] = useState([])
+    const [searchFood, setSearchFood] = useState()
+    const [combos, setCombos] = useState([])
+    const [followUp, setFollowUp] = useState([])
+    const [drinks, setDrinks] = useState([])
+    const [desserts, setDesserts] = useState([])
+    const [selectFood, setSelectFood] = useState(false)
+
+    useEffect(() => {
+        axios.get("http://localhost:4000/food")
+            .then(res => {
+                setFood(res.data)
+            })
+            .catch(err => alert(err.response.data))
+    }, [])
+
+    useEffect(() => {
+        const arrayCombo = [];
+        const arrayFollowUp = [];
+        const arrayDrinks = [];
+        const arrayDesserts = [];
+        for (let i = 0; i < food.length; i++) {
+            if (food[i].category === "COMBOS") arrayCombo.push(food[i])
+            else if (food[i].category === "FOLLOWUP") arrayFollowUp.push(food[i])
+            else if (food[i].category === "DRINKS") arrayDrinks.push(food[i])
+            else if (food[i].category === "DESSERTS") arrayDesserts.push(food[i])
+        }
+        setCombos(arrayCombo)
+        setFollowUp(arrayFollowUp)
+        setDrinks(arrayDrinks)
+        setDesserts(arrayDesserts)
+    }, [food])
+
 
     const category = [
         { name: "Combos", image: "https://www.incrivel.com/_next/image/?url=https%3A%2F%2Fincrivel-prd.adtsys.com.br%2Fwp-content%2Fuploads%2F2022%2F11%2Fburger_carne_incri%CC%81vel.png&w=828&q=75" },
-        { name: "Acompanhamentos", image: "https://acdn.mitiendanube.com/stores/690/117/products/batatablacknovo01-com-batata1-1b7acadeecc786836815623317173381-640-0.webp" },
-        { name: "Bebidas", image: "https://tb0932.vtexassets.com/arquivos/ids/165092-1600-auto?v=638131052363530000&width=1600&height=auto&aspect=true" },
+        { name: "Acompanhamentos", image: "https://www.pngmart.com/files/17/Potato-Fries-PNG-File.png" },
+        { name: "Bebidas", image: "https://looklanches.com.br/wp-content/uploads/2020/09/2l.png" },
         { name: "Sobremesas", image: "https://img.freepik.com/fotos-premium/uma-sobremesa-com-uma-colher-marrom-em-um-prato-com-fundo-branco_391229-6166.jpg?w=826" }
     ]
+
     return (
-        <Container>
-            <Search>
-                <h1>Seja bem vindo!</h1>
-                <input placeholder="O que você procura?" />
-            </Search>
+        <Container selectFood={selectFood}>
+            <Menu>
+                {selectFood ? <ConfirmOrder product={selectFood} setSelectFood={setSelectFood} /> : ""}
+                <Search>
+                    <h1>Seja bem vindo!</h1>
+                    <input onChange={e => setSearchFood(e.target.value)} placeholder="O que você procura?" />
+                </Search>
 
-            <Categories>
-                <h2>Categorias</h2>
-                <p>Navegue por categoria</p>
-                <div>
-                    {category.map(c => (
-                        <Box key={c.name}>
-                            <img src={c.image} />
-                            <p>{c.name}</p>
-                        </Box>
-                    ))}
-                </div>
-            </Categories>
+                <Categories>
+                    <h2>Categorias</h2>
+                    <p>Navegue por categoria</p>
+                    <div>
+                        {category.map(c => (
+                            <Box key={c.name}>
+                                <img src={c.image} />
+                                <p>{c.name}</p>
+                            </Box>
+                        ))}
+                    </div>
+                </Categories>
 
-            <Foods>
-                <ContainerFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                </ContainerFood>
-                <ContainerFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                </ContainerFood>
-                <ContainerFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                </ContainerFood>
-                <ContainerFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                    <BoxFood>
-                        <div></div>
-                    </BoxFood>
-                </ContainerFood>
-            </Foods>
-
-            <Check>
-
-            </Check>
+                <Products>
+                    <ContainerFood setSelectFood={setSelectFood} category={combos} />
+                    <ContainerFood setSelectFood={setSelectFood} category={followUp} />
+                    <ContainerFood setSelectFood={setSelectFood} category={drinks} />
+                    <ContainerFood setSelectFood={setSelectFood} category={desserts} />
+                </Products>
+            </Menu>
         </Container>
     )
 }
 
 const Container = styled.div`
     display: flex;
-    flex-direction: column;
-    width: 90%;
-    margin: 0 auto;
+    justify-content: center;
+    width: 100%;
     padding: 2%;
+    position: ${props => props.selectFood ? "fixed" : "relative"};
+`
+
+const Menu = styled.div`
+    width: 80%;
+    display: flex;
+    flex-direction: column;
 `
 
 const Search = styled.div`
@@ -141,14 +130,11 @@ const Categories = styled.div`
     }
 `
 
-const Foods = styled.div`
+const Products = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `
-
-const Check = styled.div``
-
 const Box = styled.div`
     width: 220px;
     height: 160px;
@@ -164,29 +150,6 @@ const Box = styled.div`
     }
 `
 
-const ContainerFood = styled.div`
-    width: 100%;
-    height: 280px;
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-`
 
-const BoxFood = styled.div`
-    width: 200px;
-    height: 250px;
-    background-image: url("https://i.pinimg.com/564x/ed/8b/88/ed8b88902879404786c7144acf631aad.jpg");
-    background-size: contain;
-    position: relative;
-    div{
-        background-color: #FFFFFF;
-        width: 100%;
-        height: 65%;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        border-top-right-radius: 30px;
-        border-top-left-radius: 30px;
 
-    }
-`
+
