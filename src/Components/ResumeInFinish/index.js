@@ -6,18 +6,18 @@ import { FollowUps, Resume, ResumeRequest, TotalPrice } from './styled';
 
 export default function InfosFinishs({ productInCar, openCar }) {
     const [totalAdds, setTotalAdds] = useState([]);
-    const [current, setCurrent] = useState(0);
+    const [countPrice, setCountPrice] = useState(0);
 
     useEffect(() => {
         let count = 0;
         setTotalAdds(productInCar);
         for(let i = 0; i < productInCar.length; i++){
-            count = count + productInCar[i].price;
+            count = count + (productInCar[i].price * productInCar[i].current);
             for(let j = 0; j < productInCar[i].totalAdds.length; j++){
                 count = count + productInCar[i].totalAdds[j].price;
             }
         }
-        setCurrent(count);
+        setCountPrice(count);
     }, [productInCar]);   
 
     return (
@@ -42,7 +42,7 @@ export default function InfosFinishs({ productInCar, openCar }) {
             </ResumeRequest>    
             <TotalPrice>
                 <p>Total do pedido</p>
-                <h1>{'R$ ' + (current / 100).toFixed(2)}</h1>
+                <h1>{'R$ ' + ((countPrice  / 100)).toFixed(2)}</h1>
             </TotalPrice>
         </Resume>
     );

@@ -31,6 +31,7 @@ export function ConfirmOrder({ checkFood, setCheckFood, setProductInCar, product
     }
 
     function finishRequest() {
+        setCurrent(1);
         const car = [...productInCar, { ...product, totalAdds, current }];
         setProductInCar(car);
         setDisplay(false);

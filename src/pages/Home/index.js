@@ -23,7 +23,7 @@ export default function Home() {
     const [display, setDisplay] = useState(false);
     const [productInCar, setProductInCar] = useState([]);
     const Header = useContext(MenuHeader);
-    const {selectFood, setSelectFood} = useContext(DataFood);
+    const { selectFood, setSelectFood } = useContext(DataFood);
 
     useEffect(() => {
         axios.get('http://localhost:4000/food')
