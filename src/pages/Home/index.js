@@ -18,7 +18,6 @@ export default function Home() {
     const [desserts, setDesserts] = useState([]);
     const [selectFood, setSelectFood] = useState(false);
     const [display, setDisplay] = useState(false);
-    const [addProductCar, setAddProductCar] = useState({totalAdds: []});
     const [openCar, setOpenCar] = useState(false);
     const [productInCar, setProductInCar] = useState([]);
 
@@ -74,7 +73,7 @@ export default function Home() {
     return (
         <Container selectFood={selectFood} display={display}>
             <Menu>
-                {selectFood ? <ConfirmOrder addProductCar={addProductCar} setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} setOpenCar={setOpenCar} display={display} setAddProductCar={setAddProductCar} product={selectFood} setSelectFood={setSelectFood} /> : ''}
+                {selectFood ? <ConfirmOrder setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} setOpenCar={setOpenCar} display={display} product={selectFood} setSelectFood={setSelectFood} /> : ''}
                 <Search>
                     <h1>Seja bem vindo!</h1>
                     <input onKeyDown={e => send(e)} onChange={e => setSearchFood(e.target.value)} placeholder='O que você procura?' />
