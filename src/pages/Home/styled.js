@@ -64,8 +64,9 @@ export const Search = styled.div`
         border: 0;
         outline: 0;
         width: 280px;
-        height: 30px;
+        height: 35px;
         padding-left: 10px;
+        border-radius: 5px;
     }
 `;
 

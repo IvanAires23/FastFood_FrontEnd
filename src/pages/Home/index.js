@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import ContainerFood from '../../Components/Foods/index.js';
 import { ConfirmOrder } from '../../Components/ConfirmOrder/index.js';
-import InfosFinishs from '../../Components/ResumeInFinish/ResumeInFinish.js';
+import InfosFinishs from '../../Components/ResumeInFinish/index.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { AddCar, Box, Buttons, Categories, Container, Continue, Menu, Products, Search } from './styled.js';
@@ -70,6 +70,25 @@ export default function Home() {
         }
     }
 
+    function searchByCategory(category){
+        if(category === 'Combos'){
+            axios.post('http://localhost:4000/food/category', {category: 'COMBOS'})
+                .then(res => setFood(res.data)).catch(() => toast.error('Não encontrado'));
+        }
+        else if(category === 'Acompanhamentos'){
+            axios.post('http://localhost:4000/food/category', {category: 'FOLLOWUP'})
+                .then(res => setFood(res.data)).catch(() => toast.error('Não encontrado'));
+        }
+        else if(category === 'Bebidas'){
+            axios.post('http://localhost:4000/food/category', {category: 'DRINKS'})
+                .then(res => setFood(res.data)).catch(() => toast.error('Não encontrado'));
+        }
+        else {
+            axios.post('http://localhost:4000/food/category', {category: 'DESSERTS'})
+                .then(res => setFood(res.data)).catch(() => toast.error('Não encontrado'));
+        }
+    }
+
     return (
         <Container selectFood={selectFood} display={display}>
             <Menu>
@@ -84,7 +103,7 @@ export default function Home() {
                     <p>Navegue por categoria</p>
                     <div>
                         {category.map((c, i) => (
-                            <Box key={i}>
+                            <Box onClick={() => searchByCategory(c.name)} key={i}>
                                 <img src={c.image} alt={c.image}/>
                                 <p>{c.name}</p>
                             </Box>
