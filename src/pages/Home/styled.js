@@ -25,7 +25,7 @@ export const Continue = styled.button`
     font-weight: 700;
 `;
 
-export const AddCar = styled.button`
+export const Finish = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;

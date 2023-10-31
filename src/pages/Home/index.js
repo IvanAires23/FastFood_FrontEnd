@@ -6,7 +6,7 @@ import { ConfirmOrder } from '../../Components/ConfirmOrder/index.js';
 import InfosFinishs from '../../Components/ResumeInFinish/index.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { AddCar, Box, Buttons, Categories, Container, Continue, Menu, Products, Search } from './styled.js';
+import { Box, Buttons, Categories, Container, Continue, Finish, Menu, Products, Search } from './styled.js';
 import MenuHeader from '../../Context/Header.js';
 import { Link } from 'react-router-dom';
 import DataFood from '../../Context/DataFood.js';
@@ -130,7 +130,7 @@ export default function Home() {
                     <InfosFinishs openCar={productInCar.length > 0 ? true : false } productInCar={productInCar} />
                     <Buttons>
                         <Continue onClick={reload} disabled={!selectFood}>Cancelar</Continue>
-                        <Link to={'/payment'}><AddCar disabled={!selectFood}>Finalizar Pedido</AddCar></Link>
+                        <Link to={'/payment'}><Finish disabled={!selectFood}>Finalizar Pedido</Finish></Link>
                     </Buttons>
                 </Menu>
 
