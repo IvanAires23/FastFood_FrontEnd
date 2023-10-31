@@ -20,7 +20,6 @@ export default function InfosFinishs({ productInCar, openCar }) {
         setCurrent(count);
     }, [productInCar]);   
 
-    console.log(totalAdds);
     return (
         <Resume display={openCar}>
             <ResumeRequest>
@@ -51,11 +50,10 @@ export default function InfosFinishs({ productInCar, openCar }) {
 
 const Resume = styled.div`
     border: 1px solid #00b50c;
-    height: 190px;
     display: ${props => props.display ? 'flex' : 'none'};
     flex-direction: column;
     justify-content: center;
-    padding: 0 4%;
+    padding: 2% 4%;
     margin-top: 20px;
 `;
 const ResumeRequest = styled.div`

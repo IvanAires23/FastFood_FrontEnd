@@ -8,7 +8,7 @@ import OptionsAdditional from './Additional';
 import InfosRequest from './ResumeInCheck';
 import Current from '../Context/Current';
 
-export function ConfirmOrder({ setProductInCar, productInCar, setDisplay, display, product, setSelectFood }) {
+export function ConfirmOrder({ checkFood, setCheckFood, setProductInCar, productInCar, setDisplay, display, product, setSelectFood }) {
 
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [totalAdds, setTotalAdds] = useState([]);
@@ -41,7 +41,7 @@ export function ConfirmOrder({ setProductInCar, productInCar, setDisplay, displa
         <Overlay display={display}>
             <Order>
                 <h2>Revise seu pedido</h2>
-                <p onClick={() => {setSelectFood(false); setSelectedOptions([]);}}>X</p>
+                <p onClick={() => {setSelectFood(false); setSelectedOptions([]); setCheckFood(checkFood.filter(item => item !== product.name));}}>X</p>
                 <div>
                     <Revision>
                         <img src={product.image} alt={product.image} />

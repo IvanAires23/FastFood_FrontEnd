@@ -17,6 +17,7 @@ export default function Home() {
     const [drinks, setDrinks] = useState([]);
     const [desserts, setDesserts] = useState([]);
     const [selectFood, setSelectFood] = useState(false);
+    const [checkFood, setCheckFood] = useState([]);
     const [display, setDisplay] = useState(false);
     const [productInCar, setProductInCar] = useState([]);
 
@@ -74,7 +75,7 @@ export default function Home() {
     return (
         <Container selectFood={selectFood} display={display}>
             <Menu>
-                {selectFood ? <ConfirmOrder setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} display={display} product={selectFood} setSelectFood={setSelectFood} /> : ''}
+                {selectFood ? <ConfirmOrder checkFood={checkFood} setCheckFood={setCheckFood} setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} display={display} product={selectFood} setSelectFood={setSelectFood} /> : ''}
                 <Search>
                     <h1>Seja bem vindo!</h1>
                     <input onKeyDown={e => send(e)} onChange={e => setSearchFood(e.target.value)} placeholder='O que você procura?' />
@@ -94,10 +95,10 @@ export default function Home() {
                 </Categories>
 
                 <Products>
-                    <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={combos} />
-                    <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={followUp} />
-                    <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={drinks} />
-                    <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={desserts} />
+                    <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={combos} />
+                    <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={followUp} />
+                    <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={drinks} />
+                    <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={desserts} />
                 </Products>
                 <InfosFinishs openCar={productInCar.length > 0 ? true : false } productInCar={productInCar} />
                 <Buttons>
