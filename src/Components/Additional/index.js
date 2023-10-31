@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import { useEffect } from 'react';
-import styled from 'styled-components';
+import { Additional, CheckAdd, Circle } from './styled';
 
 export default function OptionsAdditional({adds, selectedOptions, setSelectedOptions, setTotalAdds }) {
 
@@ -48,39 +48,3 @@ export default function OptionsAdditional({adds, selectedOptions, setSelectedOpt
     );
 }
 
-const Additional = styled.div`
-    display: flex;
-    flex-direction: column;
-    h2{
-        font-size: 20px;
-        font-weight: 700;
-    }
-    p{
-        font-weight: 400;
-        font-size: 15px;
-        margin-bottom: 10px;
-    }
-
-    >div{
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-between;
-    }
-`;
-
-const CheckAdd = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100px;
-`;
-
-const Circle = styled.div`
-    width: 20px;
-    height: 20px;
-    border: 1px solid #00b50c;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: ${props => props.selected ? '#00b50c' : ''};
-`;
