@@ -1,17 +1,19 @@
-import styled from "styled-components"
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
+import styled from 'styled-components';
 
 export default function ContainerFood({ setDisplay, category, setSelectFood }) {
 
     function select(product) {
-        setDisplay(true)
-        return setSelectFood(product)
+        setDisplay(true);
+        return setSelectFood(product);
     }
 
     return (
         <>
-            <Container height={category.length === 0 ? "0px" : "280px"}>
-                {category.map(c => (
-                    <BoxFood onClick={() => select(c)}>
+            <Container height={category.length === 0 ? '0px' : '280px'}>
+                {category.map((c, i) => (
+                    <BoxFood key={i} onClick={() => select(c)}>
                         <img src={c.image} />
                         <div>
                             <h3>{c.name}</h3>
@@ -22,7 +24,7 @@ export default function ContainerFood({ setDisplay, category, setSelectFood }) {
                 ))}
             </Container>
         </>
-    )
+    );
 }
 
 const Container = styled.div`
@@ -31,7 +33,7 @@ const Container = styled.div`
     margin-top: 10px;
     display: flex;
     justify-content: space-around;
-`
+`;
 
 const BoxFood = styled.div`
     width: 200px;
@@ -76,4 +78,4 @@ const BoxFood = styled.div`
             font-weight: 700;
         }
     }
-`
+`;

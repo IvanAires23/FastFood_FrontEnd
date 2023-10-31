@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Current from './Context/Current';

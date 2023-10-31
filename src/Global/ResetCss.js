@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const ResetCss = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -43,6 +43,6 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-}`
+}`;
 
-export default ResetCss
+export default ResetCss;

@@ -7,10 +7,10 @@ import GlobalCss from './Global/GlobalCss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <ResetCss />
-    <GlobalCss />
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <ResetCss />
+        <GlobalCss />
+        <App />
+    </React.StrictMode>
 );
 reportWebVitals();

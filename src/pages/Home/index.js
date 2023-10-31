@@ -1,32 +1,33 @@
-import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
-import styled from 'styled-components'
-import ContainerFood from '../../Components/Foods.js'
-import { ConfirmOrder } from '../../Components/ConfirmOrder.js'
-import InfosFinishs from '../../Components/ResumeInFinish.js'
-import { ToastContainer, toast } from 'react-toastify'
+/* eslint-disable react/react-in-jsx-scope */
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import ContainerFood from '../../Components/Foods.js';
+import { ConfirmOrder } from '../../Components/ConfirmOrder.js';
+import InfosFinishs from '../../Components/ResumeInFinish.js';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function Home() {
 
-    const [food, setFood] = useState([])
-    const [searchFood, setSearchFood] = useState()
-    const [combos, setCombos] = useState([])
-    const [followUp, setFollowUp] = useState([])
-    const [drinks, setDrinks] = useState([])
-    const [desserts, setDesserts] = useState([])
-    const [selectFood, setSelectFood] = useState(false)
-    const [display, setDisplay] = useState(false)
-    const [productCar, setProductCar] = useState({ name: '' })
-    const [openCar, setOpenCar] = useState(false)
+    const [food, setFood] = useState([]);
+    const [searchFood, setSearchFood] = useState();
+    const [combos, setCombos] = useState([]);
+    const [followUp, setFollowUp] = useState([]);
+    const [drinks, setDrinks] = useState([]);
+    const [desserts, setDesserts] = useState([]);
+    const [selectFood, setSelectFood] = useState(false);
+    const [display, setDisplay] = useState(false);
+    const [productCar, setProductCar] = useState({ name: '' });
+    const [openCar, setOpenCar] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost:4000/food')
             .then(res => {
-                setFood(res.data)
+                setFood(res.data);
             })
-            .catch(err => alert(err.response.data))
-    }, [])
+            .catch(err => alert(err.response.data));
+    }, []);
 
     useEffect(() => {
         const arrayCombo = [];
@@ -34,38 +35,38 @@ export default function Home() {
         const arrayDrinks = [];
         const arrayDesserts = [];
         for (let i = 0; i < food.length; i++) {
-            if (food[i].category === 'COMBOS') arrayCombo.push(food[i])
-            else if (food[i].category === 'FOLLOWUP') arrayFollowUp.push(food[i])
-            else if (food[i].category === 'DRINKS') arrayDrinks.push(food[i])
-            else if (food[i].category === 'DESSERTS') arrayDesserts.push(food[i])
+            if (food[i].category === 'COMBOS') arrayCombo.push(food[i]);
+            else if (food[i].category === 'FOLLOWUP') arrayFollowUp.push(food[i]);
+            else if (food[i].category === 'DRINKS') arrayDrinks.push(food[i]);
+            else if (food[i].category === 'DESSERTS') arrayDesserts.push(food[i]);
         }
-        setCombos(arrayCombo)
-        setFollowUp(arrayFollowUp)
-        setDrinks(arrayDrinks)
-        setDesserts(arrayDesserts)
-    }, [food])
+        setCombos(arrayCombo);
+        setFollowUp(arrayFollowUp);
+        setDrinks(arrayDrinks);
+        setDesserts(arrayDesserts);
+    }, [food]);
 
     const category = [
         { name: 'Combos', image: 'https://www.incrivel.com/_next/image/?url=https%3A%2F%2Fincrivel-prd.adtsys.com.br%2Fwp-content%2Fuploads%2F2022%2F11%2Fburger_carne_incri%CC%81vel.png&w=828&q=75' },
         { name: 'Acompanhamentos', image: 'https://www.pngmart.com/files/17/Potato-Fries-PNG-File.png' },
         { name: 'Bebidas', image: 'https://looklanches.com.br/wp-content/uploads/2020/09/2l.png' },
         { name: 'Sobremesas', image: 'https://img.freepik.com/fotos-premium/uma-sobremesa-com-uma-colher-marrom-em-um-prato-com-fundo-branco_391229-6166.jpg?w=826' }
-    ]
+    ];
 
     function send(e) {
         if (e.key === 'Enter') {
             if (searchFood === '') {
                 return axios.get('http://localhost:4000/food')
                     .then(res => {
-                        setFood(res.data)
+                        setFood(res.data);
                     })
-                    .catch(err => alert(err.response.data))
+                    .catch(err => alert(err.response.data));
             }
             axios.post('http://localhost:4000/food', { code: searchFood })
                 .then(res => setFood(res.data))
                 .catch(() => {
-                    toast.error('Não encontrado')
-                })
+                    toast.error('Não encontrado');
+                });
         }
     }
 
@@ -84,7 +85,7 @@ export default function Home() {
                     <div>
                         {category.map((c, i) => (
                             <Box key={i}>
-                                <img src={c.image} />
+                                <img src={c.image} alt={c.image}/>
                                 <p>{c.name}</p>
                             </Box>
                         ))}
@@ -107,7 +108,7 @@ export default function Home() {
 
             <ToastContainer />
         </Container>
-    )
+    );
 }
 
 const Buttons = styled.div`
@@ -115,7 +116,7 @@ const Buttons = styled.div`
     justify-content: flex-end;
     margin-bottom: 300px;
     margin-top: 15px;
-`
+`;
 
 const Continue = styled.div`
     display: flex;
@@ -130,7 +131,7 @@ const Continue = styled.div`
     border-radius: 15px;
     color: #00b50c;
     font-weight: 700;
-`
+`;
 
 const AddCar = styled.div`
     display: flex;
@@ -145,7 +146,7 @@ const AddCar = styled.div`
     cursor: pointer;
     color: #FFFFFF;
     font-weight: 700;
-`
+`;
 
 const Container = styled.div`
     display: flex;
@@ -153,13 +154,13 @@ const Container = styled.div`
     width: 100%;
     padding: 2%;
     position: ${props => props.selectFood && props.display ? 'fixed' : 'relative'};
-`
+`;
 
 const Menu = styled.div`
     width: 80%;
     display: flex;
     flex-direction: column;
-`
+`;
 
 const Search = styled.div`
     height: 70px;
@@ -177,7 +178,7 @@ const Search = styled.div`
         height: 30px;
         padding-left: 10px;
     }
-`
+`;
 
 const Categories = styled.div`
     display: flex;
@@ -195,13 +196,13 @@ const Categories = styled.div`
         flex-direction: row;
         justify-content: space-around;
     }
-`
+`;
 
 const Products = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-`
+`;
 const Box = styled.div`
     width: 220px;
     height: 160px;
@@ -215,4 +216,4 @@ const Box = styled.div`
     img{
         width: 100px;
     }
-`
+`;

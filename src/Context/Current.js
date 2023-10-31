@@ -1,5 +1,5 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
-const Current = createContext({})
+const Current = createContext({});
 
-export default Current
+export default Current;
