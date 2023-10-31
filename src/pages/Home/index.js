@@ -18,8 +18,9 @@ export default function Home() {
     const [desserts, setDesserts] = useState([]);
     const [selectFood, setSelectFood] = useState(false);
     const [display, setDisplay] = useState(false);
-    const [productCar, setProductCar] = useState({ name: '' });
+    const [addProductCar, setAddProductCar] = useState({totalAdds: []});
     const [openCar, setOpenCar] = useState(false);
+    const [productInCar, setProductInCar] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:4000/food')
@@ -73,7 +74,7 @@ export default function Home() {
     return (
         <Container selectFood={selectFood} display={display}>
             <Menu>
-                {selectFood ? <ConfirmOrder setDisplay={setDisplay} setOpenCar={setOpenCar} display={display} setProductCar={setProductCar} product={selectFood} setSelectFood={setSelectFood} /> : ''}
+                {selectFood ? <ConfirmOrder addProductCar={addProductCar} setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} setOpenCar={setOpenCar} display={display} setAddProductCar={setAddProductCar} product={selectFood} setSelectFood={setSelectFood} /> : ''}
                 <Search>
                     <h1>Seja bem vindo!</h1>
                     <input onKeyDown={e => send(e)} onChange={e => setSearchFood(e.target.value)} placeholder='O que você procura?' />
@@ -98,7 +99,7 @@ export default function Home() {
                     <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={drinks} />
                     <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={desserts} />
                 </Products>
-                <InfosFinishs openCar={openCar} productCar={productCar} />
+                <InfosFinishs openCar={openCar} productInCar={productInCar} />
 
                 <Buttons>
                     <Continue>Cancelar</Continue>

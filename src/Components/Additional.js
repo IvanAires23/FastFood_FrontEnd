@@ -6,11 +6,11 @@ import styled from 'styled-components';
 export default function OptionsAdditional({adds, selectedOptions, setSelectedOptions, setTotalAdds }) {
 
     useEffect(() => {
-        let priceAdds = 0;
+        let priceAdds = [];
 
         for (let i = 0; i < adds.length; i++) {
             if (selectedOptions.includes(adds[i].name)) {
-                priceAdds += adds[i].price;
+                priceAdds.push(adds[i]);
             }
         }
 

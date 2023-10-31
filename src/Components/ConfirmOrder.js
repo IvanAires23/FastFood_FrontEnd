@@ -8,10 +8,10 @@ import OptionsAdditional from './Additional';
 import InfosRequest from './ResumeInCheck';
 import Current from '../Context/Current';
 
-export function ConfirmOrder({ setOpenCar, setDisplay, display, product, setSelectFood, setProductCar }) {
+export function ConfirmOrder({ setProductInCar, productInCar, setOpenCar, setDisplay, display, product, setSelectFood, setAddProductCar }) {
 
     const [selectedOptions, setSelectedOptions] = useState([]);
-    const [totalAdds, setTotalAdds] = useState(0);
+    const [totalAdds, setTotalAdds] = useState([]);
     const { current, setCurrent } = useContext(Current);
 
     const adds = [
@@ -30,17 +30,20 @@ export function ConfirmOrder({ setOpenCar, setDisplay, display, product, setSele
         }
     }
 
-    function openResume() {
+    function finishRequest() {
+        const car = [...productInCar, { ...product, totalAdds, current }];
+        setProductInCar(car);
         setOpenCar(true);
         setDisplay(false);
-        setProductCar({ ...product, totalAdds });
+        setSelectedOptions([]);
+        setAddProductCar({ ...product, totalAdds, current });
     }
 
     return (
         <Overlay display={display}>
             <Order>
                 <h2>Revise seu pedido</h2>
-                <p onClick={() => setSelectFood(false)}>X</p>
+                <p onClick={() => {setSelectFood(false); setSelectedOptions([]);}}>X</p>
                 <div>
                     <Revision>
                         <img src={product.image} alt={product.image} />
@@ -67,8 +70,8 @@ export function ConfirmOrder({ setOpenCar, setDisplay, display, product, setSele
                 <InfosRequest product={product} totalAdds={totalAdds} />
 
                 <Buttons>
-                    <Continue onClick={() => openResume(product)}>Continuar adicionando</Continue>
-                    <AddCar onClick={() => openResume(product)} >Finalizar Pedido</AddCar>
+                    <Continue onClick={() => finishRequest()}>Continuar adicionando</Continue>
+                    <AddCar onClick={() => finishRequest()} >Finalizar Pedido</AddCar>
                 </Buttons>
             </Order>
         </Overlay>
