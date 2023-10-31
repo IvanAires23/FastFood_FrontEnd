@@ -1,8 +1,9 @@
 import styled from "styled-components"
 
-export default function ContainerFood({ category, setSelectFood }) {
+export default function ContainerFood({ setDisplay, category, setSelectFood }) {
 
     function select(product) {
+        setDisplay(true)
         return setSelectFood(product)
     }
 
@@ -38,6 +39,8 @@ const BoxFood = styled.div`
     background-image: url("https://i.pinimg.com/564x/ed/8b/88/ed8b88902879404786c7144acf631aad.jpg");
     background-size: contain;
     position: relative;
+    border: 1px solid #00b50c;
+    border-radius: 10px;
     cursor: pointer;
     img{
         position: absolute;
@@ -60,6 +63,7 @@ const BoxFood = styled.div`
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
+        border-radius: 10px;
         h3{
             font-weight: 700;
             font-size: 20px;

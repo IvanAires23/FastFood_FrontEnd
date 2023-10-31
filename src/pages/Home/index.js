@@ -1,9 +1,9 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import ContainerFood from "../../Components/Foods.js"
 import { ConfirmOrder } from "../../Components/ConfirmOrder.js"
-import InfosRequest from "../../Components/Resume.js"
+import Current from "../../Context/Current.js"
 
 export default function Home() {
 
@@ -14,6 +14,10 @@ export default function Home() {
     const [drinks, setDrinks] = useState([])
     const [desserts, setDesserts] = useState([])
     const [selectFood, setSelectFood] = useState(false)
+    const [display, setDisplay] = useState(false)
+    const [productCar, setProductCar] = useState({ name: "" })
+    const [openCar, setOpenCar] = useState(false)
+    const { current } = useContext(Current)
 
     useEffect(() => {
         axios.get("http://localhost:4000/food")
@@ -48,10 +52,12 @@ export default function Home() {
         { name: "Sobremesas", image: "https://img.freepik.com/fotos-premium/uma-sobremesa-com-uma-colher-marrom-em-um-prato-com-fundo-branco_391229-6166.jpg?w=826" }
     ]
 
+    console.log(productCar)
+
     return (
-        <Container selectFood={selectFood}>
+        <Container selectFood={selectFood} display={display}>
             <Menu>
-                {selectFood ? <ConfirmOrder product={selectFood} setSelectFood={setSelectFood} /> : ""}
+                {selectFood ? <ConfirmOrder setDisplay={setDisplay} setOpenCar={setOpenCar} display={display} setProductCar={setProductCar} product={selectFood} setSelectFood={setSelectFood} /> : ""}
                 <Search>
                     <h1>Seja bem vindo!</h1>
                     <input onChange={e => setSearchFood(e.target.value)} placeholder="O que você procura?" />
@@ -61,8 +67,8 @@ export default function Home() {
                     <h2>Categorias</h2>
                     <p>Navegue por categoria</p>
                     <div>
-                        {category.map(c => (
-                            <Box key={c.name}>
+                        {category.map((c, i) => (
+                            <Box key={i}>
                                 <img src={c.image} />
                                 <p>{c.name}</p>
                             </Box>
@@ -71,27 +77,97 @@ export default function Home() {
                 </Categories>
 
                 <Products>
-                    <ContainerFood setSelectFood={setSelectFood} category={combos} />
-                    <ContainerFood setSelectFood={setSelectFood} category={followUp} />
-                    <ContainerFood setSelectFood={setSelectFood} category={drinks} />
-                    <ContainerFood setSelectFood={setSelectFood} category={desserts} />
+                    <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={combos} />
+                    <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={followUp} />
+                    <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={drinks} />
+                    <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={desserts} />
                 </Products>
-                <Resume>
-                    <InfosRequest product={selectFood} />
+                <Resume display={openCar}>
+                    <ResumeRequest>
+                        <h3>{current + "x " + productCar.name}</h3>
+                        <h2>{"R$" + (productCar.price / 100).toFixed(2)}</h2>
+                    </ResumeRequest>
+                    <TotalPrice>
+                        <p>Total do pedido</p>
+                        <h1>{"R$ " + (((current * productCar.price) / 100) + (productCar.totalAdds / 100)).toFixed(2)}</h1>
+                    </TotalPrice>
                 </Resume>
+
+                <Buttons>
+                    <Continue>Cancelar</Continue>
+                    <AddCar >Finalizar Pedido</AddCar>
+                </Buttons>
             </Menu>
         </Container>
     )
 }
 
-const Resume = styled.div``
+
+const Buttons = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 300px;
+    margin-top: 15px;
+`
+
+const Continue = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+    margin-right: 30px;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1px solid #00b50c;
+    border-radius: 15px;
+    color: #00b50c;
+    font-weight: 700;
+`
+
+const AddCar = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+    margin-right: 50px;
+    background-color: #00b50c;
+    border: 1px solid #00b50c;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-weight: 700;
+`
+
+const Resume = styled.div`
+    border: 1px solid #00b50c;
+    padding-bottom: 50px;
+    display: ${props => props.display ? "block" : "none"};
+`
+
+const ResumeRequest = styled.div`
+    display: flex;
+    padding: 2% 0;
+    padding-left: 2%;
+    width: 90%;
+    justify-content: space-between;
+`
+
+const TotalPrice = styled.div`
+    display: flex;
+    flex-direction: column;
+    border-top: 2px dashed #CCCCCC;
+    padding-top: 1%;
+    padding-left: 2%;
+`
 
 const Container = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
     padding: 2%;
-    position: ${props => props.selectFood ? "fixed" : "relative"};
+    position: ${props => props.selectFood && props.display ? "fixed" : "relative"};
 `
 
 const Menu = styled.div`

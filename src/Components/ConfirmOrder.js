@@ -6,7 +6,7 @@ import OptionsAdditional from "./Additional"
 import InfosRequest from "./Resume"
 import Current from "../Context/Current"
 
-export function ConfirmOrder({ product, setSelectFood }) {
+export function ConfirmOrder({ setOpenCar, setDisplay, display, product, setSelectFood, setProductCar }) {
 
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [totalAdds, setTotalAdds] = useState(0)
@@ -22,8 +22,14 @@ export function ConfirmOrder({ product, setSelectFood }) {
         }
     }
 
+    function openResume() {
+        setOpenCar(true)
+        setDisplay(false)
+        setProductCar({ ...product, totalAdds })
+    }
+
     return (
-        <Overlay>
+        <Overlay display={display}>
             <Order>
                 <h2>Revise seu pedido</h2>
                 <p onClick={() => setSelectFood(false)}>X</p>
@@ -52,14 +58,56 @@ export function ConfirmOrder({ product, setSelectFood }) {
 
                 <InfosRequest product={product} totalAdds={totalAdds} />
 
+                <Buttons>
+                    <Continue onClick={() => openResume(product)}>Continuar adicionando</Continue>
+                    <AddCar onClick={() => openResume(product)} >Finalizar Pedido</AddCar>
+                </Buttons>
             </Order>
         </Overlay>
     )
 }
 
+const Buttons = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 0;
+    margin-bottom: 300px;
+`
+
+const Continue = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+    margin-right: 30px;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1px solid #00b50c;
+    border-radius: 15px;
+    color: #00b50c;
+    font-weight: 700;
+`
+
+const AddCar = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+    margin-right: 50px;
+    background-color: #00b50c;
+    border: 1px solid #00b50c;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-weight: 700;
+`
+
 const Overlay = styled.div`
     position: absolute;
-    display: flex;
+    display: ${props => props.display ? "flex" : "none"};
     justify-content: center;
     align-items: center;
     left:0;
@@ -81,6 +129,7 @@ const Order = styled.form`
     overflow: scroll;
     max-height: 90vh;
     border: none;
+    padding-bottom: 8%;
     >div{
         display: flex;
         justify-content: space-around;
@@ -130,7 +179,7 @@ const Count = styled.div`
 const AddSub = styled.div`
     width: 33%;
     height: 40px;
-    background-color: green;
+    background-color: #00b50c;
     display: flex;
     justify-content: center;
     align-items: center;
