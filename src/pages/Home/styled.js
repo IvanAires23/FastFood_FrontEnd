@@ -5,9 +5,12 @@ export const Buttons = styled.div`
     justify-content: flex-end;
     margin-bottom: 300px;
     margin-top: 15px;
+    a{
+        text-decoration: none;
+    }
 `;
 
-export const Continue = styled.div`
+export const Continue = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,21 +19,21 @@ export const Continue = styled.div`
     margin-right: 30px;
     cursor: pointer;
     background-color: #FFFFFF;
-    border: 1px solid #00b50c;
+    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
     border-radius: 15px;
-    color: #00b50c;
+    color: ${props => props.disabled ? '#ccc' : '#00b50c'};
     font-weight: 700;
 `;
 
-export const AddCar = styled.div`
+export const AddCar = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
     width: 250px;
     height: 50px;
     margin-right: 50px;
-    background-color: #00b50c;
-    border: 1px solid #00b50c;
+    background-color: ${props => props.disabled ? '#ccc' : '#00b50c'};;
+    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
     border-radius: 15px;
     cursor: pointer;
     color: #FFFFFF;

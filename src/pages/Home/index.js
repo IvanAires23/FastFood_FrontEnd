@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { AddCar, Box, Buttons, Categories, Container, Continue, Menu, Products, Search } from './styled.js';
 import MenuHeader from '../../Context/Header.js';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
 
@@ -72,6 +73,10 @@ export default function Home() {
         }
     }
 
+    function reload(){
+        window.location.reload();
+    }
+
     function searchByCategory(category){
         if(category === 'Combos'){
             axios.post('http://localhost:4000/food/category', {category: 'COMBOS'})
@@ -123,8 +128,8 @@ export default function Home() {
                     </Products>
                     <InfosFinishs openCar={productInCar.length > 0 ? true : false } productInCar={productInCar} />
                     <Buttons>
-                        <Continue>Cancelar</Continue>
-                        <AddCar>Finalizar Pedido</AddCar>
+                        <Continue onClick={reload} disabled={!selectFood}>Cancelar</Continue>
+                        <Link to={'/payment'}><AddCar disabled={!selectFood}>Finalizar Pedido</AddCar></Link>
                     </Buttons>
                 </Menu>
 

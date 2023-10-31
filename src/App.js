@@ -5,6 +5,7 @@ import Current from './Context/Current';
 import { useState } from 'react';
 import MenuHeader from './Context/Header';
 import Top from './Components/Header';
+import Payment from './pages/Payment';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
                 <Current.Provider value={{ current, setCurrent }}>
                     <Routes>
                         <Route path='/' element={<Home />} />
+                        <Route path='/payment' element={<Payment />}/>
                     </Routes>
                 </Current.Provider>
             </MenuHeader.Provider>
