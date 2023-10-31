@@ -1,25 +1,19 @@
-import { useEffect } from "react";
-import styled from "styled-components"
+import { useEffect } from 'react';
+import styled from 'styled-components';
 
-export default function OptionsAdditional({ selectedOptions, setSelectedOptions, setTotalAdds }) {
-
-    const adds = [
-        { name: "Bacon", price: 100, qnt: "10g" },
-        { name: "Cheddar", price: 100, qnt: "10g" },
-        { name: "Molho", price: 100, qnt: "10g" }
-    ]
+export default function OptionsAdditional({adds, selectedOptions, setSelectedOptions, setTotalAdds }) {
 
     useEffect(() => {
         let priceAdds = 0;
 
         for (let i = 0; i < adds.length; i++) {
             if (selectedOptions.includes(adds[i].name)) {
-                priceAdds += adds[i].price
+                priceAdds += adds[i].price;
             }
         }
 
-        setTotalAdds(priceAdds)
-    }, [selectedOptions])
+        setTotalAdds(priceAdds);
+    }, [selectedOptions]);
 
     function handleOptionClick(option) {
         if (selectedOptions.includes(option.name)) {
@@ -49,7 +43,7 @@ export default function OptionsAdditional({ selectedOptions, setSelectedOptions,
                 </div>
             ))}
         </Additional>
-    )
+    );
 }
 
 const Additional = styled.div`
@@ -71,14 +65,14 @@ const Additional = styled.div`
         width: 100%;
         justify-content: space-between;
     }
-`
+`;
 
 const CheckAdd = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100px;
-`
+`;
 
 const Circle = styled.div`
     width: 20px;
@@ -86,5 +80,5 @@ const Circle = styled.div`
     border: 1px solid #00b50c;
     border-radius: 10px;
     cursor: pointer;
-    background-color: ${props => props.selected ? "#00b50c" : ""};
-`
+    background-color: ${props => props.selected ? '#00b50c' : ''};
+`;

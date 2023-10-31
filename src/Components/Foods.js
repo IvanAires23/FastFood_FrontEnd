@@ -9,7 +9,7 @@ export default function ContainerFood({ setDisplay, category, setSelectFood }) {
 
     return (
         <>
-            <Container>
+            <Container height={category.length === 0 ? "0px" : "280px"}>
                 {category.map(c => (
                     <BoxFood onClick={() => select(c)}>
                         <img src={c.image} />
@@ -27,7 +27,7 @@ export default function ContainerFood({ setDisplay, category, setSelectFood }) {
 
 const Container = styled.div`
     width: 100%;
-    height: 280px;
+    height: ${props => props.heights};
     margin-top: 10px;
     display: flex;
     justify-content: space-around;

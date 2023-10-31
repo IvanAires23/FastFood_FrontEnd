@@ -1,16 +1,22 @@
-import styled from "styled-components"
-import { IoMdAdd } from "react-icons/io"
-import { GrFormSubtract } from "react-icons/gr"
-import { useContext, useState } from "react"
-import OptionsAdditional from "./Additional"
-import InfosRequest from "./Resume"
-import Current from "../Context/Current"
+import styled from "styled-components";
+import { IoMdAdd } from "react-icons/io";
+import { GrFormSubtract } from "react-icons/gr";
+import { useContext, useState } from "react";
+import OptionsAdditional from "./Additional";
+import InfosRequest from "./ResumeInCheck";
+import Current from "../Context/Current";
 
 export function ConfirmOrder({ setOpenCar, setDisplay, display, product, setSelectFood, setProductCar }) {
 
     const [selectedOptions, setSelectedOptions] = useState([]);
-    const [totalAdds, setTotalAdds] = useState(0)
-    const { current, setCurrent } = useContext(Current)
+    const [totalAdds, setTotalAdds] = useState(0);
+    const { current, setCurrent } = useContext(Current);
+
+    const adds = [
+        { name: "Bacon", price: 100, qnt: "10g" },
+        { name: "Cheddar", price: 100, qnt: "10g" },
+        { name: "Molho", price: 100, qnt: "10g" }
+    ]
 
     function alterCurrent(op) {
         if (op !== "sub") {
@@ -49,7 +55,7 @@ export function ConfirmOrder({ setOpenCar, setDisplay, display, product, setSele
                     <h2>{"R$" + (product.price / 100).toFixed(2)}</h2>
                 </div>
 
-                <OptionsAdditional setTotalAdds={setTotalAdds} selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
+                <OptionsAdditional adds={adds} setTotalAdds={setTotalAdds} selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
 
                 <Obs>
                     <h2>Observações</h2>

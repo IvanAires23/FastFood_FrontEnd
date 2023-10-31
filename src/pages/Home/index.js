@@ -1,9 +1,11 @@
-import axios from "axios"
-import { useContext, useEffect, useState } from "react"
-import styled from "styled-components"
-import ContainerFood from "../../Components/Foods.js"
-import { ConfirmOrder } from "../../Components/ConfirmOrder.js"
-import Current from "../../Context/Current.js"
+import axios from 'axios'
+import { useContext, useEffect, useState } from 'react'
+import styled from 'styled-components'
+import ContainerFood from '../../Components/Foods.js'
+import { ConfirmOrder } from '../../Components/ConfirmOrder.js'
+import InfosFinishs from '../../Components/ResumeInFinish.js'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function Home() {
 
@@ -15,12 +17,11 @@ export default function Home() {
     const [desserts, setDesserts] = useState([])
     const [selectFood, setSelectFood] = useState(false)
     const [display, setDisplay] = useState(false)
-    const [productCar, setProductCar] = useState({ name: "" })
+    const [productCar, setProductCar] = useState({ name: '' })
     const [openCar, setOpenCar] = useState(false)
-    const { current } = useContext(Current)
 
     useEffect(() => {
-        axios.get("http://localhost:4000/food")
+        axios.get('http://localhost:4000/food')
             .then(res => {
                 setFood(res.data)
             })
@@ -33,10 +34,10 @@ export default function Home() {
         const arrayDrinks = [];
         const arrayDesserts = [];
         for (let i = 0; i < food.length; i++) {
-            if (food[i].category === "COMBOS") arrayCombo.push(food[i])
-            else if (food[i].category === "FOLLOWUP") arrayFollowUp.push(food[i])
-            else if (food[i].category === "DRINKS") arrayDrinks.push(food[i])
-            else if (food[i].category === "DESSERTS") arrayDesserts.push(food[i])
+            if (food[i].category === 'COMBOS') arrayCombo.push(food[i])
+            else if (food[i].category === 'FOLLOWUP') arrayFollowUp.push(food[i])
+            else if (food[i].category === 'DRINKS') arrayDrinks.push(food[i])
+            else if (food[i].category === 'DESSERTS') arrayDesserts.push(food[i])
         }
         setCombos(arrayCombo)
         setFollowUp(arrayFollowUp)
@@ -44,23 +45,37 @@ export default function Home() {
         setDesserts(arrayDesserts)
     }, [food])
 
-
     const category = [
-        { name: "Combos", image: "https://www.incrivel.com/_next/image/?url=https%3A%2F%2Fincrivel-prd.adtsys.com.br%2Fwp-content%2Fuploads%2F2022%2F11%2Fburger_carne_incri%CC%81vel.png&w=828&q=75" },
-        { name: "Acompanhamentos", image: "https://www.pngmart.com/files/17/Potato-Fries-PNG-File.png" },
-        { name: "Bebidas", image: "https://looklanches.com.br/wp-content/uploads/2020/09/2l.png" },
-        { name: "Sobremesas", image: "https://img.freepik.com/fotos-premium/uma-sobremesa-com-uma-colher-marrom-em-um-prato-com-fundo-branco_391229-6166.jpg?w=826" }
+        { name: 'Combos', image: 'https://www.incrivel.com/_next/image/?url=https%3A%2F%2Fincrivel-prd.adtsys.com.br%2Fwp-content%2Fuploads%2F2022%2F11%2Fburger_carne_incri%CC%81vel.png&w=828&q=75' },
+        { name: 'Acompanhamentos', image: 'https://www.pngmart.com/files/17/Potato-Fries-PNG-File.png' },
+        { name: 'Bebidas', image: 'https://looklanches.com.br/wp-content/uploads/2020/09/2l.png' },
+        { name: 'Sobremesas', image: 'https://img.freepik.com/fotos-premium/uma-sobremesa-com-uma-colher-marrom-em-um-prato-com-fundo-branco_391229-6166.jpg?w=826' }
     ]
 
-    console.log(productCar)
+    function send(e) {
+        if (e.key === 'Enter') {
+            if (searchFood === '') {
+                return axios.get('http://localhost:4000/food')
+                    .then(res => {
+                        setFood(res.data)
+                    })
+                    .catch(err => alert(err.response.data))
+            }
+            axios.post('http://localhost:4000/food', { code: searchFood })
+                .then(res => setFood(res.data))
+                .catch(() => {
+                    toast.error('Não encontrado')
+                })
+        }
+    }
 
     return (
         <Container selectFood={selectFood} display={display}>
             <Menu>
-                {selectFood ? <ConfirmOrder setDisplay={setDisplay} setOpenCar={setOpenCar} display={display} setProductCar={setProductCar} product={selectFood} setSelectFood={setSelectFood} /> : ""}
+                {selectFood ? <ConfirmOrder setDisplay={setDisplay} setOpenCar={setOpenCar} display={display} setProductCar={setProductCar} product={selectFood} setSelectFood={setSelectFood} /> : ''}
                 <Search>
                     <h1>Seja bem vindo!</h1>
-                    <input onChange={e => setSearchFood(e.target.value)} placeholder="O que você procura?" />
+                    <input onKeyDown={e => send(e)} onChange={e => setSearchFood(e.target.value)} placeholder='O que você procura?' />
                 </Search>
 
                 <Categories>
@@ -82,26 +97,18 @@ export default function Home() {
                     <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={drinks} />
                     <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={desserts} />
                 </Products>
-                <Resume display={openCar}>
-                    <ResumeRequest>
-                        <h3>{current + "x " + productCar.name}</h3>
-                        <h2>{"R$" + (productCar.price / 100).toFixed(2)}</h2>
-                    </ResumeRequest>
-                    <TotalPrice>
-                        <p>Total do pedido</p>
-                        <h1>{"R$ " + (((current * productCar.price) / 100) + (productCar.totalAdds / 100)).toFixed(2)}</h1>
-                    </TotalPrice>
-                </Resume>
+                <InfosFinishs openCar={openCar} productCar={productCar} />
 
                 <Buttons>
                     <Continue>Cancelar</Continue>
-                    <AddCar >Finalizar Pedido</AddCar>
+                    <AddCar>Finalizar Pedido</AddCar>
                 </Buttons>
             </Menu>
+
+            <ToastContainer />
         </Container>
     )
 }
-
 
 const Buttons = styled.div`
     display: flex;
@@ -140,34 +147,12 @@ const AddCar = styled.div`
     font-weight: 700;
 `
 
-const Resume = styled.div`
-    border: 1px solid #00b50c;
-    padding-bottom: 50px;
-    display: ${props => props.display ? "block" : "none"};
-`
-
-const ResumeRequest = styled.div`
-    display: flex;
-    padding: 2% 0;
-    padding-left: 2%;
-    width: 90%;
-    justify-content: space-between;
-`
-
-const TotalPrice = styled.div`
-    display: flex;
-    flex-direction: column;
-    border-top: 2px dashed #CCCCCC;
-    padding-top: 1%;
-    padding-left: 2%;
-`
-
 const Container = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
     padding: 2%;
-    position: ${props => props.selectFood && props.display ? "fixed" : "relative"};
+    position: ${props => props.selectFood && props.display ? 'fixed' : 'relative'};
 `
 
 const Menu = styled.div`
@@ -231,7 +216,3 @@ const Box = styled.div`
         width: 100px;
     }
 `
-
-
-
-
