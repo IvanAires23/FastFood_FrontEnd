@@ -8,7 +8,7 @@ import OptionsAdditional from './Additional';
 import InfosRequest from './ResumeInCheck';
 import Current from '../Context/Current';
 
-export function ConfirmOrder({ setProductInCar, productInCar, setOpenCar, setDisplay, display, product, setSelectFood }) {
+export function ConfirmOrder({ setProductInCar, productInCar, setDisplay, display, product, setSelectFood }) {
 
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [totalAdds, setTotalAdds] = useState([]);
@@ -33,7 +33,6 @@ export function ConfirmOrder({ setProductInCar, productInCar, setOpenCar, setDis
     function finishRequest() {
         const car = [...productInCar, { ...product, totalAdds, current }];
         setProductInCar(car);
-        setOpenCar(true);
         setDisplay(false);
         setSelectedOptions([]);
     }

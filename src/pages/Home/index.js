@@ -18,7 +18,6 @@ export default function Home() {
     const [desserts, setDesserts] = useState([]);
     const [selectFood, setSelectFood] = useState(false);
     const [display, setDisplay] = useState(false);
-    const [openCar, setOpenCar] = useState(false);
     const [productInCar, setProductInCar] = useState([]);
 
     useEffect(() => {
@@ -70,10 +69,12 @@ export default function Home() {
         }
     }
 
+    console.log(productInCar.length);
+
     return (
         <Container selectFood={selectFood} display={display}>
             <Menu>
-                {selectFood ? <ConfirmOrder setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} setOpenCar={setOpenCar} display={display} product={selectFood} setSelectFood={setSelectFood} /> : ''}
+                {selectFood ? <ConfirmOrder setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} display={display} product={selectFood} setSelectFood={setSelectFood} /> : ''}
                 <Search>
                     <h1>Seja bem vindo!</h1>
                     <input onKeyDown={e => send(e)} onChange={e => setSearchFood(e.target.value)} placeholder='O que você procura?' />
@@ -98,8 +99,7 @@ export default function Home() {
                     <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={drinks} />
                     <ContainerFood setDisplay={setDisplay} setSelectFood={setSelectFood} category={desserts} />
                 </Products>
-                <InfosFinishs openCar={openCar} productInCar={productInCar} />
-
+                <InfosFinishs openCar={productInCar.length > 0 ? true : false } productInCar={productInCar} />
                 <Buttons>
                     <Continue>Cancelar</Continue>
                     <AddCar>Finalizar Pedido</AddCar>
