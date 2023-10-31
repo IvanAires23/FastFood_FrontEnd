@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Current from './Context/Current';
 import { useState } from 'react';
+import MenuHeader from './Context/Header';
+import Top from './Components/Header';
 
 function App() {
 
@@ -10,11 +12,13 @@ function App() {
 
     return (
         <BrowserRouter>
-            <Current.Provider value={{ current, setCurrent }}>
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                </Routes>
-            </Current.Provider>
+            <MenuHeader.Provider value={<Top />}>
+                <Current.Provider value={{ current, setCurrent }}>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                    </Routes>
+                </Current.Provider>
+            </MenuHeader.Provider>
         </BrowserRouter>
     );
 }

@@ -43,6 +43,7 @@ export const Container = styled.div`
     width: 100%;
     padding: 2%;
     position: ${props => props.selectFood && props.display ? 'fixed' : 'relative'};
+    margin-top: 30px;
 `;
 
 export const Menu = styled.div`

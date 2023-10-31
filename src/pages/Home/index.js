@@ -1,12 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ContainerFood from '../../Components/Foods/index.js';
 import { ConfirmOrder } from '../../Components/ConfirmOrder/index.js';
 import InfosFinishs from '../../Components/ResumeInFinish/index.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { AddCar, Box, Buttons, Categories, Container, Continue, Menu, Products, Search } from './styled.js';
+import MenuHeader from '../../Context/Header.js';
 
 export default function Home() {
 
@@ -20,6 +21,7 @@ export default function Home() {
     const [checkFood, setCheckFood] = useState([]);
     const [display, setDisplay] = useState(false);
     const [productInCar, setProductInCar] = useState([]);
+    const Header = useContext(MenuHeader);
 
     useEffect(() => {
         axios.get('http://localhost:4000/food')
@@ -90,41 +92,44 @@ export default function Home() {
     }
 
     return (
-        <Container selectFood={selectFood} display={display}>
-            <Menu>
-                {selectFood ? <ConfirmOrder checkFood={checkFood} setCheckFood={setCheckFood} setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} display={display} product={selectFood} setSelectFood={setSelectFood} /> : ''}
-                <Search>
-                    <h1>Seja bem vindo!</h1>
-                    <input onKeyDown={e => send(e)} onChange={e => setSearchFood(e.target.value)} placeholder='O que você procura?' />
-                </Search>
+        <>
+            {Header}
+            <Container selectFood={selectFood} display={display}>
+                <Menu>
+                    {selectFood ? <ConfirmOrder checkFood={checkFood} setCheckFood={setCheckFood} setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} display={display} product={selectFood} setSelectFood={setSelectFood} /> : ''}
+                    <Search>
+                        <h1>Seja bem vindo!</h1>
+                        <input onKeyDown={e => send(e)} onChange={e => setSearchFood(e.target.value)} placeholder='O que você procura?' />
+                    </Search>
 
-                <Categories>
-                    <h2>Categorias</h2>
-                    <p>Navegue por categoria</p>
-                    <div>
-                        {category.map((c, i) => (
-                            <Box onClick={() => searchByCategory(c.name)} key={i}>
-                                <img src={c.image} alt={c.image}/>
-                                <p>{c.name}</p>
-                            </Box>
-                        ))}
-                    </div>
-                </Categories>
+                    <Categories>
+                        <h2>Categorias</h2>
+                        <p>Navegue por categoria</p>
+                        <div>
+                            {category.map((c, i) => (
+                                <Box onClick={() => searchByCategory(c.name)} key={i}>
+                                    <img src={c.image} alt={c.image}/>
+                                    <p>{c.name}</p>
+                                </Box>
+                            ))}
+                        </div>
+                    </Categories>
 
-                <Products>
-                    <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={combos} />
-                    <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={followUp} />
-                    <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={drinks} />
-                    <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={desserts} />
-                </Products>
-                <InfosFinishs openCar={productInCar.length > 0 ? true : false } productInCar={productInCar} />
-                <Buttons>
-                    <Continue>Cancelar</Continue>
-                    <AddCar>Finalizar Pedido</AddCar>
-                </Buttons>
-            </Menu>
+                    <Products>
+                        <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={combos} />
+                        <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={followUp} />
+                        <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={drinks} />
+                        <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={desserts} />
+                    </Products>
+                    <InfosFinishs openCar={productInCar.length > 0 ? true : false } productInCar={productInCar} />
+                    <Buttons>
+                        <Continue>Cancelar</Continue>
+                        <AddCar>Finalizar Pedido</AddCar>
+                    </Buttons>
+                </Menu>
 
-            <ToastContainer />
-        </Container>
+                <ToastContainer />
+            </Container>
+        </>
     );
 }
