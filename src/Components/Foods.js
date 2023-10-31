@@ -62,8 +62,9 @@ const BoxFood = styled.div`
     background-image: url("https://i.pinimg.com/564x/ed/8b/88/ed8b88902879404786c7144acf631aad.jpg");
     background-size: contain;
     position: relative;
-    border: 1px solid #00b50c;
+    box-shadow: 2px 2px 5px #CCCCCC;
     border-radius: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     img{
         position: absolute;
