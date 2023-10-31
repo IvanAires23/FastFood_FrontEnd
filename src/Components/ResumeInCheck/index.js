@@ -1,13 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from 'react';
-import Current from '../../Context/Current';
+import DataFood from '../../Context/DataFood';
 import { Resume, ResumeRequest, TotalPrice } from './styled';
 
 export default function InfosRequest({ product, totalAdds }) {
 
     const [addsPrice, setAddsPrice] = useState(0);
-    const { current } = useContext(Current);
+    const { current } = useContext(DataFood);
 
     useEffect(() => {
         let count = 0;

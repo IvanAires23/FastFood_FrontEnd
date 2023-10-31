@@ -5,14 +5,14 @@ import { GrFormSubtract } from 'react-icons/gr';
 import { useContext, useState } from 'react';
 import OptionsAdditional from '../Additional';
 import InfosRequest from '../ResumeInCheck';
-import Current from '../../Context/Current';
+import DataFood from '../../Context/DataFood';
 import { AddCar, AddSub, Buttons, Continue, Count, Obs, Order, Overlay, Revision } from './styled';
 
 export function ConfirmOrder({ checkFood, setCheckFood, setProductInCar, productInCar, setDisplay, display, product, setSelectFood }) {
 
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [totalAdds, setTotalAdds] = useState([]);
-    const { current, setCurrent } = useContext(Current);
+    const { current, setCurrent } = useContext(DataFood);
 
     const adds = [
         { name: 'Bacon', price: 100, qnt: '10g' },

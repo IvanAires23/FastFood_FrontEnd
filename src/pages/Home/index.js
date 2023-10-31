@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { AddCar, Box, Buttons, Categories, Container, Continue, Menu, Products, Search } from './styled.js';
 import MenuHeader from '../../Context/Header.js';
 import { Link } from 'react-router-dom';
+import DataFood from '../../Context/DataFood.js';
 
 export default function Home() {
 
@@ -18,11 +19,11 @@ export default function Home() {
     const [followUp, setFollowUp] = useState([]);
     const [drinks, setDrinks] = useState([]);
     const [desserts, setDesserts] = useState([]);
-    const [selectFood, setSelectFood] = useState(false);
     const [checkFood, setCheckFood] = useState([]);
     const [display, setDisplay] = useState(false);
     const [productInCar, setProductInCar] = useState([]);
     const Header = useContext(MenuHeader);
+    const {selectFood, setSelectFood} = useContext(DataFood);
 
     useEffect(() => {
         axios.get('http://localhost:4000/food')
