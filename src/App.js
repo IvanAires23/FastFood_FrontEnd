@@ -6,6 +6,7 @@ import { useState } from 'react';
 import MenuHeader from './Context/Header';
 import Top from './Components/Header';
 import Payment from './pages/Payment';
+import Kitchen from './pages/Kitchen';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
                     <Routes>
                         <Route path='/' element={<Home />} />
                         <Route path='/payment' element={<Payment />}/>
+                        <Route path='/kitchen' element={<Kitchen />}/>
                     </Routes>
                 </DataFood.Provider>
             </MenuHeader.Provider>
