@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { Box, Buttons, Categories, Container, Continue, Finish, Menu, Products, Search } from './styled.js';
 import MenuHeader from '../../Context/Header.js';
 import { Link } from 'react-router-dom';
+import DATABASE_URL from '../../database.js';
 
 export default function Home() {
 
@@ -26,7 +27,7 @@ export default function Home() {
     const Header = useContext(MenuHeader);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/food')
+        axios.get(`${DATABASE_URL}/food`)
             .then(res => {
                 setFood(res.data);
             })
@@ -60,13 +61,13 @@ export default function Home() {
     function send(e) {
         if (e.key === 'Enter') {
             if (searchFood === '') {
-                return axios.get('http://localhost:4000/food')
+                return axios.get(`${DATABASE_URL}/food`)
                     .then(res => {
                         setFood(res.data);
                     })
                     .catch(err => alert(err.response.data));
             }
-            axios.post('http://localhost:4000/food', { code: searchFood })
+            axios.post(`${DATABASE_URL}/food`, { code: searchFood })
                 .then(res => setFood(res.data))
                 .catch(() => {
                     toast.error('Não encontrado');
@@ -80,19 +81,19 @@ export default function Home() {
 
     function searchByCategory(category){
         if(category === 'Combos'){
-            axios.post('http://localhost:4000/food/category', {category: 'COMBOS'})
+            axios.post(`${DATABASE_URL}/food/category`, {category: 'COMBOS'})
                 .then(res => setFood(res.data)).catch(() => toast.error('Não encontrado'));
         }
         else if(category === 'Acompanhamentos'){
-            axios.post('http://localhost:4000/food/category', {category: 'FOLLOWUP'})
+            axios.post(`${DATABASE_URL}/food/category`, {category: 'FOLLOWUP'})
                 .then(res => setFood(res.data)).catch(() => toast.error('Não encontrado'));
         }
         else if(category === 'Bebidas'){
-            axios.post('http://localhost:4000/food/category', {category: 'DRINKS'})
+            axios.post(`${DATABASE_URL}/food/category`, {category: 'DRINKS'})
                 .then(res => setFood(res.data)).catch(() => toast.error('Não encontrado'));
         }
         else {
-            axios.post('http://localhost:4000/food/category', {category: 'DESSERTS'})
+            axios.post(`${DATABASE_URL}/food/category`, {category: 'DESSERTS'})
                 .then(res => setFood(res.data)).catch(() => toast.error('Não encontrado'));
         }
     }
