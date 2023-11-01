@@ -29,6 +29,7 @@ export default function ConfirmPayment({ display }){
 }
 
 const Sucess = styled.div`
+    position: relative;
     transition: 300ms;
     width: 600px;
     height: 450px;
@@ -50,8 +51,8 @@ const Sucess = styled.div`
 
 const Exit = styled.div`
     position: absolute;
-    top: 25%;
-    left: 67%;
+    top: 2%;
+    right: 5%;
     font-weight: 700;
     color: #ccc;
 `;

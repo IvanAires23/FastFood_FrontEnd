@@ -57,7 +57,7 @@ export default function Payment(){
             }
             setDisplay(true);
         } catch (err) {
-            if(err.response.status === 400) return toast.error('Verifique os dados antes de prosseguir');
+            if(err.response.status === 400) return toast.error('Insira seu nome e metodo de pagamento');
             toast.error('Algo inesperado aconteceu');
         }
     }
