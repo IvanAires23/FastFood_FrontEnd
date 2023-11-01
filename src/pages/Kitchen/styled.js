@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 90%;
+    height: 80vh;
     margin: 0 auto;
     margin-top: 70px;
     display: flex;
-    justify-content: space-between;
-  
+    justify-content: space-between;  
 `;
 
 export const PreparingReady = styled.div`
@@ -18,6 +18,12 @@ export const PreparingReady = styled.div`
         }
 `;
 
+export const DivisionLine = styled.div`
+    width: 10px;
+    background-color: black;
+    border-radius: 5px;
+    margin-right: 15px;
+`;
 
 export const Box = styled.div`
     width: 70%;
