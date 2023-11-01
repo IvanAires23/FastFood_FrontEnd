@@ -1,12 +1,14 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FollowUps, Resume, ResumeRequest, TotalPrice } from './styled';
+import DataFood from '../../Context/DataFood';
 
 export default function InfosFinishs({ productInCar, openCar }) {
     const [totalAdds, setTotalAdds] = useState([]);
     const [countPrice, setCountPrice] = useState(0);
+    const { setDataFoods} = useContext(DataFood);
 
     useEffect(() => {
         let count = 0;
@@ -17,6 +19,7 @@ export default function InfosFinishs({ productInCar, openCar }) {
                 count = count + productInCar[i].totalAdds[j].price;
             }
         }
+        setDataFoods(productInCar);
         setCountPrice(count);
     }, [productInCar]);   
 

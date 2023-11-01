@@ -8,7 +8,7 @@ import InfosRequest from '../ResumeInCheck';
 import DataFood from '../../Context/DataFood';
 import { AddCar, AddSub, Buttons, Continue, Count, Obs, Order, Overlay, Revision } from './styled';
 
-export function ConfirmOrder({ checkFood, setCheckFood, setProductInCar, productInCar, setDisplay, display, product, setSelectFood }) {
+export function ConfirmOrder(props) {
 
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [totalAdds, setTotalAdds] = useState([]);
@@ -32,23 +32,23 @@ export function ConfirmOrder({ checkFood, setCheckFood, setProductInCar, product
 
     function finishRequest() {
         setCurrent(1);
-        const car = [...productInCar, { ...product, totalAdds, current }];
-        setProductInCar(car);
-        setDisplay(false);
+        const car = [...props.productInCar, { ...props.product, totalAdds, current, observation: props.observation }];
+        props.setProductInCar(car);
+        props.setDisplay(false);
         setSelectedOptions([]);
     }
 
     return (
-        <Overlay display={display}>
+        <Overlay display={props.display}>
             <Order>
                 <h2>Revise seu pedido</h2>
-                <p onClick={() => {setSelectFood(false); setSelectedOptions([]); setCheckFood(checkFood.filter(item => item !== product.name));}}>X</p>
+                <p onClick={() => {props.setSelectFood(false); setSelectedOptions([]); props.setCheckFood(props.checkFood.filter(item => item !== props.product.name)); props.setObservation();}}>X</p>
                 <div>
                     <Revision>
-                        <img src={product.image} alt={product.image} />
+                        <img src={props.product.image} alt={props.product.image} />
                         <div>
-                            <h2>{product.name}</h2>
-                            <p>{product.description}</p>
+                            <h2>{props.product.name}</h2>
+                            <p>{props.product.description}</p>
                             <Count>
                                 <AddSub onClick={() => alterCurrent('sub')}><GrFormSubtract /></AddSub>
                                 {current}
@@ -56,17 +56,17 @@ export function ConfirmOrder({ checkFood, setCheckFood, setProductInCar, product
                             </Count>
                         </div>
                     </Revision>
-                    <h2>{'R$' + (product.price / 100).toFixed(2)}</h2>
+                    <h2>{'R$' + (props.product.price / 100).toFixed(2)}</h2>
                 </div>
 
                 <OptionsAdditional adds={adds} setTotalAdds={setTotalAdds} selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
 
                 <Obs>
                     <h2>Observações</h2>
-                    <textarea placeholder="Adicione uma observação ao pedido" />
+                    <textarea onChange={e => props.setObservation(e.target.value)} placeholder="Adicione uma observação ao pedido" />
                 </Obs>
 
-                <InfosRequest product={product} totalAdds={totalAdds} />
+                <InfosRequest product={props.product} totalAdds={totalAdds} />
 
                 <Buttons>
                     <Continue onClick={() => finishRequest()}>Continuar adicionando</Continue>

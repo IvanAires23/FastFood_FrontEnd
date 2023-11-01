@@ -9,10 +9,10 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { Box, Buttons, Categories, Container, Continue, Finish, Menu, Products, Search } from './styled.js';
 import MenuHeader from '../../Context/Header.js';
 import { Link } from 'react-router-dom';
-import DataFood from '../../Context/DataFood.js';
 
 export default function Home() {
 
+    const [selectFood, setSelectFood] = useState(false);
     const [food, setFood] = useState([]);
     const [searchFood, setSearchFood] = useState();
     const [combos, setCombos] = useState([]);
@@ -22,8 +22,8 @@ export default function Home() {
     const [checkFood, setCheckFood] = useState([]);
     const [display, setDisplay] = useState(false);
     const [productInCar, setProductInCar] = useState([]);
+    const [observation, setObservation] = useState();
     const Header = useContext(MenuHeader);
-    const { selectFood, setSelectFood } = useContext(DataFood);
 
     useEffect(() => {
         axios.get('http://localhost:4000/food')
@@ -102,7 +102,7 @@ export default function Home() {
             {Header}
             <Container selectFood={selectFood} display={display}>
                 <Menu>
-                    {selectFood ? <ConfirmOrder checkFood={checkFood} setCheckFood={setCheckFood} setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} display={display} product={selectFood} setSelectFood={setSelectFood} /> : ''}
+                    {selectFood ? <ConfirmOrder observation={observation} setObservation={setObservation} checkFood={checkFood} setCheckFood={setCheckFood} setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} display={display} product={selectFood} setSelectFood={setSelectFood} /> : ''}
                     <Search>
                         <h1>Seja bem vindo!</h1>
                         <input onKeyDown={e => send(e)} onChange={e => setSearchFood(e.target.value)} placeholder='O que você procura?' />
@@ -127,7 +127,7 @@ export default function Home() {
                         <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={drinks} />
                         <ContainerFood setCheckFood={setCheckFood} checkFood={checkFood} setDisplay={setDisplay} setSelectFood={setSelectFood} category={desserts} />
                     </Products>
-                    <InfosFinishs openCar={productInCar.length > 0 ? true : false } productInCar={productInCar} />
+                    <InfosFinishs observation={observation} openCar={productInCar.length > 0 ? true : false } productInCar={productInCar} />
                     <Buttons>
                         <Continue onClick={reload} disabled={!selectFood}>Cancelar</Continue>
                         <Link to={'/payment'}><Finish disabled={!selectFood}>Finalizar Pedido</Finish></Link>

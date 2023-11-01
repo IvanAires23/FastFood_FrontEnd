@@ -10,12 +10,12 @@ import Payment from './pages/Payment';
 function App() {
 
     const [current, setCurrent] = useState(1);
-    const [selectFood, setSelectFood] = useState(false);
+    const [dataFoods, setDataFoods] = useState([]);
 
     return (
         <BrowserRouter>
             <MenuHeader.Provider value={<Top />}>
-                <DataFood.Provider value={{ current, setCurrent, selectFood, setSelectFood }}>
+                <DataFood.Provider value={{ current, setCurrent, dataFoods, setDataFoods }}>
                     <Routes>
                         <Route path='/' element={<Home />} />
                         <Route path='/payment' element={<Payment />}/>
