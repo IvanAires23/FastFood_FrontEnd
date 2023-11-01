@@ -8,6 +8,7 @@ import DataFood from '../../Context/DataFood';
 export default function Payment(){
 
     const [countPrice, setCountPrice] = useState(0);
+    const [selectPayment, setSelectPayment] = useState();
     const Header = useContext(MenuHeader);
     const {dataFoods} = useContext(DataFood);
     const formPayment = ['Credito', 'Débito', 'Dinheiro'];
@@ -22,6 +23,12 @@ export default function Payment(){
         }
         setCountPrice(count);
     }, [dataFoods]); 
+
+    function handlePaymentClick(option) {
+        if (selectPayment !== option) {
+            setSelectPayment(option);
+        }
+    }
 
     return(
         <>
@@ -69,8 +76,14 @@ export default function Payment(){
                                 <h3>Selecione a forma de pagamento:</h3>
                                 <Methods>
                                     {formPayment.map((m, i) => (
-                                        <Method key={i}>
-
+                                        <Method selectPayment={selectPayment === m } key={i}>
+                                            <div>
+                                                <NameMethod>
+                                                    <BiSolidWalletAlt />
+                                                    <h3>{m}</h3>
+                                                </NameMethod>
+                                                <Selected selectPayment={selectPayment === m } onClick={() => handlePaymentClick(m)}></Selected>
+                                            </div>
                                         </Method>
                                     ))}
                                 </Methods>
@@ -78,11 +91,11 @@ export default function Payment(){
                             <div>
                                 <div>
                                     <label>Valor Entregue</label>
-                                    <input placeholder='Primeiro nome'/>
+                                    <input placeholder=''/>
                                 </div>
                                 <div>
                                     <label>Troco</label>
-                                    <input />
+                                    <input disabled />
                                 </div>
                             </div>
                         </FormOfPayment>
@@ -128,6 +141,7 @@ const Container = styled.div`
 
 const ResumePayment = styled.div`
     display: flex;
+    justify-content: space-between;
     width: 100%;
     padding: 0 2%;
     >div >h3{
@@ -204,20 +218,55 @@ const Code = styled.div`
         padding: 2%;
     }
 `;
-
-const Methods = styled.div``;
-
 const FormOfPayment = styled.div`
+    width: 50%;
+    padding-left: 4%;
     >div >h3{
         font-weight: 700;
     }
+`;
+
+const Methods = styled.div`
+    width: 100%;
+    height: 35vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
 `;
 
 const Method = styled.div`
-    width: 90%;
-    height: 50px;
-    border: 1px solid #ccc;
+    width: 80%;
+    height: 80px;
+    border: 1px solid ${props => props.selectPayment ? '#10b32c': '#ccc'};
+    transition: 300ms;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    >div{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 4%;
+        height: 40px;
+    }
+`;
+
+const NameMethod = styled.div`
+    width: 200px;
+    display: flex;
+    svg{
+        margin-right: 20px;
+    }
+`;
+
+const Selected = styled.div`
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid #10b32c;
+    transition: 300ms;
+    background-color: ${props => props.selectPayment ? '#10b32c': '#FFFFF'};
+    cursor: pointer;
 `;
