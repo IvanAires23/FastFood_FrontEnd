@@ -4,6 +4,7 @@ import {BiSolidWalletAlt} from 'react-icons/bi';
 import styled from 'styled-components';
 import MenuHeader from '../../Context/Header';
 import DataFood from '../../Context/DataFood';
+import { Link } from 'react-router-dom';
 
 export default function Payment(){
 
@@ -30,6 +31,9 @@ export default function Payment(){
             setSelectPayment(option);
         }
     }
+
+
+    console.log(dataFoods);
 
     return(
         <>
@@ -102,9 +106,10 @@ export default function Payment(){
                         </FormOfPayment>
                     </ResumePayment>
                     
-                    <div>
-                        <div></div>
-                    </div>
+                    <Buttons>
+                        <Link to={'/'}><Cancel>Cancelar</Cancel></Link>
+                        <Finish>Finalizar pedido</Finish>
+                    </Buttons>
                 </Container>
             </Page>
         </>
@@ -288,3 +293,43 @@ const Values = styled.div`
         }
     }
 `;
+
+const Buttons = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 300px;
+    margin-top: 80px;
+    a{
+        text-decoration: none;
+    }
+`;
+
+const Cancel = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
+    border-radius: 15px;
+    color: ${props => props.disabled ? '#ccc' : '#00b50c'};
+    font-weight: 700;
+`;
+
+const Finish = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+    margin: 0 50px;
+    background-color: ${props => props.disabled ? '#ccc' : '#00b50c'};;
+    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-weight: 700;
+`;
+
