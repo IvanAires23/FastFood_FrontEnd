@@ -4,15 +4,22 @@ import {BiSolidWalletAlt} from 'react-icons/bi';
 import styled from 'styled-components';
 import MenuHeader from '../../Context/Header';
 import DataFood from '../../Context/DataFood';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import DATABASE_URL from '../../database';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
 
 export default function Payment(){
 
     const [countPrice, setCountPrice] = useState(0);
     const [selectPayment, setSelectPayment] = useState();
     const [valueDelivered, setValueDelivered] = useState();
+    const [username, setUsername] = useState();
     const Header = useContext(MenuHeader);
     const {dataFoods} = useContext(DataFood);
+    const navigate = useNavigate();
     const formPayment = ['Credito', 'Débito', 'Dinheiro'];
 
     useEffect(() => {
@@ -23,6 +30,7 @@ export default function Payment(){
                 count = count + dataFoods[i].totalAdds[j].price;
             }
         }
+        setValueDelivered(count);
         setCountPrice(count);
     }, [dataFoods]); 
 
@@ -32,8 +40,30 @@ export default function Payment(){
         }
     }
 
+    async function finishRequest(){
+        try {
+            for (let i = 0; i < dataFoods.length; i++) {
+                let payment;
+                if(selectPayment === 'Dinheiro') payment = 'MONEY';
+                else if(selectPayment === 'Débito') payment = 'DEBIT';
+                else if(selectPayment === 'Credito') payment = 'CREDIT';
+                const element = {
+                    money:'countPrice',
+                    payment: payment,
+                    name: username,
+                    foodId: dataFoods[i].id,
+                    change: ((valueDelivered * 100) - countPrice),
+                    observation: dataFoods[i].observation
+                };
+                await axios.post(`${DATABASE_URL}/kitchen`, element);
+            }
 
-    console.log(dataFoods);
+            navigate('/kitchen');
+        } catch (err) {
+            if(err.response.status === 400) return toast.error('Verifique os dados antes de prosseguir');
+            toast.error('Algo inesperado aconteceu');
+        }
+    }
 
     return(
         <>
@@ -67,7 +97,7 @@ export default function Payment(){
                             <NameAndCode>
                                 <Name>
                                     <label>Nome do cliente</label>
-                                    <input placeholder='Primeiro nome'/>
+                                    <input onChange={e => setUsername(e.target.value)} placeholder='Primeiro nome'/>
                                 </Name>
                                 <Code>
                                     <label>Code</label>
@@ -100,7 +130,7 @@ export default function Payment(){
                                 </div>
                                 <div>
                                     <label>Troco (R$)</label>
-                                    <input disabled placeholder={(valueDelivered * 100) - countPrice > 0 ? `${(((valueDelivered * 100) - countPrice) / 100).toFixed(2)}`: '0.00'}/>
+                                    <input disabled placeholder={(valueDelivered * 100) - countPrice > 0 && valueDelivered !== countPrice ? `${(((valueDelivered * 100) - countPrice) / 100).toFixed(2)}`: '0.00'}/>
                                 </div>
                             </Values>
                         </FormOfPayment>
@@ -108,9 +138,10 @@ export default function Payment(){
                     
                     <Buttons>
                         <Link to={'/'}><Cancel>Cancelar</Cancel></Link>
-                        <Finish>Finalizar pedido</Finish>
+                        <Finish onClick={finishRequest}>Finalizar pedido</Finish>
                     </Buttons>
                 </Container>
+                <ToastContainer />
             </Page>
         </>
     );
