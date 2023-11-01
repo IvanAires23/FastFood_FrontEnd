@@ -1,76 +1,102 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useContext, useEffect, useState } from 'react';
 import MenuHeader from '../../Context/Header';
-import styled from 'styled-components';
 import axios from 'axios';
 import DATABASE_URL from '../../database';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import DataFood from '../../Context/DataFood';
+import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
+import { Box, Container, PreparingReady, ReadyOrCancel } from './styled';
 
-/* eslint-disable react/react-in-jsx-scope */
 export default function Kitchen(){
 
     const [requests, setRequests] = useState([]);
-    const [foodInKitchen, setFoodInKitchen] = useState([]);
+    const [preparing, setPreparing] = useState([]);
+    const [ready, setReady] = useState([]);
     const Header = useContext(MenuHeader);
+    const {setSelected} = useContext(DataFood);
 
     useEffect(() => {
+        setSelected('Cozinha');
         axios.get(`${DATABASE_URL}/kitchen`)
             .then(res => setRequests(res.data))
             .catch(err => toast.error(err.response.data.message));
         
-        getFoodInKitchen();
-    }, []);
+        findFoodInKitchen();
+    }, [requests]);
 
-    async function getFoodInKitchen(){
+    async function findFoodInKitchen(){
         try {
+            const foodsInPreparing = [];
+            const foodsReadys = [];
             for (let i = 0; i < requests.length; i++) {
                 const element = requests[i];
-                const food = await axios.get(`${DATABASE_URL}/kitchen/${element.foodId}`);
-                console.log(food);
-                setFoodInKitchen([... foodInKitchen, food]);
+                if(element.preparation === 'PREPARING'){
+                    const food = await axios.get(`${DATABASE_URL}/kitchen/${element.foodId}`);
+                    foodsInPreparing.push(food.data);
+                }else{
+                    const food = await axios.get(`${DATABASE_URL}/kitchen/${element.foodId}`);
+                    foodsReadys.push(food.data);
+                }
             }
+            setPreparing(foodsInPreparing);
+            setReady(foodsReadys);
         } catch (err) {
             toast.error(err.response.data.message);
         }
+    }
+
+    function updateKitchen(id){
+        axios.post(`${DATABASE_URL}/kitchen/ready`, { id })
+            .then(() => window.location.reload())
+            .catch(err => toast.error(err.response.data.message));
+    }
+
+    function deleteKitchen(id){
+        axios.post(`${DATABASE_URL}/kitchen/delete`, { id })
+            .then(() => window.location.reload())
+            .catch(err => toast.error(err.response.data.message));
     }
     
     return(
         <>
             {Header}
             <Container>
-                <div>
+                <PreparingReady>
                     <h1>Preparando:</h1>
-                    {foodInKitchen.map((r, i) => (
+                    {preparing.length === 0 ? 'Sem pedidos em preparação no momento' : preparing.map((r, i) => (
                         <Box key={i}>
-                            
+                            <img src={r.image} />
+                            <div>
+                                <h1>{r.code + ' - ' + requests[i].nameUser}</h1>
+                                <p>{requests[i].quant + 'x ' + r.name}</p>
+                            </div>
+                            <ReadyOrCancel>
+                                <button><AiOutlineClose /></button>
+                                <button onClick={() => updateKitchen(requests[i].id)}><AiOutlineCheck /></button>
+                            </ReadyOrCancel>
                         </Box>
                     ))}
-                </div>
-                <div>
+                </PreparingReady>
+                <PreparingReady>
                     <h1>Pronto:</h1>
-                    <div></div>
-                </div>
+                    {ready.length === 0 ? 'Sem pedidos prontos no momento' : ready.map((r, i) => (
+                        <Box key={i}>
+                            <img src={r.image} />
+                            <div>
+                                <h1>{r.code + ' - ' + requests[i].nameUser}</h1>
+                                <p>{requests[i].quant + 'x ' + r.name}</p>
+                            </div>
+                            <ReadyOrCancel>
+                                <button onClick={() => deleteKitchen(requests[i].id)}><AiOutlineClose /></button>
+                            </ReadyOrCancel>
+                        </Box>
+                    ))}
+                </PreparingReady>
+
+                <ToastContainer />
             </Container>
         </>
     );
 }
-
-const Container = styled.div`
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 70px;
-    display: flex;
-    justify-content: space-between;
-    >div{
-        width: 50%;
-        h1{
-            font-size: 26px;
-            font-weight: 700;
-        }
-    }
-`;
-
-const Box = styled.div`
-    width: 60%;
-    height: 80px;
-    border: 1px solid #ccc;
-`;

@@ -50,7 +50,8 @@ export default function Payment(){
                     name: username,
                     foodId: dataFoods[i].id,
                     change: ((valueDelivered * 100) - countPrice),
-                    observation: dataFoods[i].observation
+                    observation: dataFoods[i].observation,
+                    quant: dataFoods[i].current,
                 };
                 await axios.post(`${DATABASE_URL}/kitchen`, element);
             }
