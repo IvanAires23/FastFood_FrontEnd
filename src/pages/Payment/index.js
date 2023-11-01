@@ -9,6 +9,7 @@ export default function Payment(){
 
     const [countPrice, setCountPrice] = useState(0);
     const [selectPayment, setSelectPayment] = useState();
+    const [valueDelivered, setValueDelivered] = useState();
     const Header = useContext(MenuHeader);
     const {dataFoods} = useContext(DataFood);
     const formPayment = ['Credito', 'Débito', 'Dinheiro'];
@@ -88,16 +89,16 @@ export default function Payment(){
                                     ))}
                                 </Methods>
                             </div>
-                            <div>
+                            <Values>
                                 <div>
-                                    <label>Valor Entregue</label>
-                                    <input placeholder=''/>
+                                    <label>Valor Entregue (R$)</label>
+                                    <input onChange={e => setValueDelivered(e.target.value)} placeholder={(countPrice / 100).toFixed(2)}/>
                                 </div>
                                 <div>
-                                    <label>Troco</label>
-                                    <input disabled />
+                                    <label>Troco (R$)</label>
+                                    <input disabled placeholder={(valueDelivered * 100) - countPrice > 0 ? `${(((valueDelivered * 100) - countPrice) / 100).toFixed(2)}`: '0.00'}/>
                                 </div>
-                            </div>
+                            </Values>
                         </FormOfPayment>
                     </ResumePayment>
                     
@@ -269,4 +270,21 @@ const Selected = styled.div`
     transition: 300ms;
     background-color: ${props => props.selectPayment ? '#10b32c': '#FFFFF'};
     cursor: pointer;
+`;
+
+const Values = styled.div`
+    display: flex;  
+    width: 80%;
+    div{
+        display: flex;  
+        flex-direction: column;
+        label{
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        input{
+            width: 90%;
+        }
+    }
 `;
