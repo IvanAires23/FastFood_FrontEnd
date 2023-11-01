@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import DataFood from '../../Context/DataFood';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
-import { Box, Container, DivisionLine, PreparingReady, ReadyOrCancel } from './styled';
+import { Box, Container, Line, PreparingReady, ReadyOrCancel } from './styled';
 
 export default function Kitchen(){
 
@@ -93,7 +93,7 @@ export default function Kitchen(){
                         </Box>
                     ))}
                 </PreparingReady>
-                <DivisionLine />
+                <Line />
                 <PreparingReady>
                     <h1>Pronto:</h1>
                     {ready.length === 0 || requests.length === 0  ? 'Sem pedidos prontos no momento' : ready.map((r, i) => (

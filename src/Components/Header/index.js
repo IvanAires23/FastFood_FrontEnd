@@ -17,7 +17,7 @@ export default function Top({selected, setSelected}){
         } else if(page === 'Cozinha') {
             navigate('/kitchen');
         } else if(page === 'Retirada') {
-            navigate('/finish');
+            navigate('/delivery');
         }
     }
 

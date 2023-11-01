@@ -7,6 +7,7 @@ import MenuHeader from './Context/Header';
 import Top from './Components/Header';
 import Payment from './pages/Payment';
 import Kitchen from './pages/Kitchen';
+import Delivery from './pages/Delivery';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
                         <Route path='/' element={<Home />} />
                         <Route path='/payment' element={<Payment />}/>
                         <Route path='/kitchen' element={<Kitchen />}/>
+                        <Route path='/delivery' element={<Delivery />}/>
                     </Routes>
                 </DataFood.Provider>
             </MenuHeader.Provider>

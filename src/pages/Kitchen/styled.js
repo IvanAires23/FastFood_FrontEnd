@@ -18,7 +18,7 @@ export const PreparingReady = styled.div`
         }
 `;
 
-export const DivisionLine = styled.div`
+export const Line = styled.div`
     width: 10px;
     background-color: black;
     border-radius: 5px;
