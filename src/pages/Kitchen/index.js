@@ -23,7 +23,6 @@ export default function Kitchen(){
         axios.get(`${DATABASE_URL}/kitchen`)
             .then(res => setRequests(res.data))
             .catch(err => toast.error(err.response.data.message));
-        
     }, [reload]);
 
     useEffect(() => {
@@ -51,16 +50,27 @@ export default function Kitchen(){
         }
     }
 
-    function updateKitchen(id){
-        axios.post(`${DATABASE_URL}/kitchen/ready`, { id })
-            .then(() => setReload(reload ? false : true))
-            .catch(err => toast.error(err.response.data.message));
+    async function updateKitchen(food){
+        for (let i = 0; i < requests.length; i++) {
+            if(food.id === requests[i].foodId){
+                await axios.post(`${DATABASE_URL}/kitchen/ready`, { id: requests[i].id })
+                    .then(() => setReload(reload ? false : true))
+                    .catch(err => toast.error(err.response.data.message));
+                return;
+            }
+        }
+        
     }
 
-    function deleteKitchen(id){
-        axios.post(`${DATABASE_URL}/kitchen/delete`, { id })
-            .then(() => setReload(reload ? false : true))
-            .catch(err => toast.error(err.response.data.message));
+    async function deleteKitchen(food){
+        for (let i = 0; i < requests.length; i++) {
+            if(food.id === requests[i].foodId){
+                await axios.post(`${DATABASE_URL}/kitchen/delete`, { id: requests[i].id })
+                    .then(() => setReload(reload ? false : true))
+                    .catch(err => toast.error(err.response.data.message));
+                return;
+            }
+        }
     }
     
     return(
@@ -69,16 +79,16 @@ export default function Kitchen(){
             <Container>
                 <PreparingReady>
                     <h1>Preparando:</h1>
-                    {preparing.length === 0 || requests.length === 0 ? 'Sem pedidos em preparação no momento' : preparing.map((r, i) => (
+                    {preparing.length === 0 ? 'Sem pedidos em preparação no momento' : preparing.map((p, i) => (
                         <Box key={i}>
-                            <img src={r.image} />
+                            <img src={p.image} />
                             <div>
-                                <h1>{r.code + ' - ' + requests[i].nameUser}</h1>
-                                <p>{requests[i].quant + 'x ' + r.name}</p>
+                                <h1>{p.code + ' - ' + requests[i].nameUser}</h1>
+                                <p>{requests[i].quant + 'x ' + p.name}</p>
                             </div>
                             <ReadyOrCancel>
-                                <button><AiOutlineClose /></button>
-                                <button onClick={() => updateKitchen(requests[i].id)}><AiOutlineCheck /></button>
+                                <button onClick={() => deleteKitchen(p)}><AiOutlineClose /></button>
+                                <button onClick={() => updateKitchen(p)}><AiOutlineCheck /></button>
                             </ReadyOrCancel>
                         </Box>
                     ))}
@@ -93,7 +103,7 @@ export default function Kitchen(){
                                 <p>{requests[i].quant + 'x ' + r.name}</p>
                             </div>
                             <ReadyOrCancel>
-                                <button onClick={() => deleteKitchen(requests[i].id)}><AiOutlineClose /></button>
+                                <button onClick={() => deleteKitchen(r)}><AiOutlineClose /></button>
                             </ReadyOrCancel>
                         </Box>
                     ))}

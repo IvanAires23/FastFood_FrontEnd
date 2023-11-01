@@ -18,6 +18,7 @@ export const Method = styled.div`
     display: flex;
     align-items: center;
     margin: 15px 0;
+    cursor: pointer;
     >div{
         width: 100%;
         display: flex;
@@ -43,5 +44,4 @@ export const Selected = styled.div`
     border: 1px solid #10b32c;
     transition: 300ms;
     background-color: ${props => props.selectPayment ? '#10b32c': '#FFFFF'};
-    cursor: pointer;
 `;
