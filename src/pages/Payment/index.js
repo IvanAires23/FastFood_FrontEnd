@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import {BiSolidWalletAlt} from 'react-icons/bi';
 import MenuHeader from '../../Context/Header';
 import DataFood from '../../Context/DataFood';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import DATABASE_URL from '../../database';
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { Buttons, Cancel, Code, Container, Finish, FormOfPayment, Name, NameAndCode, Page, PurchaseInformation, ResumePayment, ResumeRequest, TotalPrice, Values } from './styled';
 import MethodsOfPayment from '../../Components/Methods';
 import Purchase from '../../Components/PurchaseInformation';
+import ConfirmPayment from '../../Components/ConfirmPayment';
 
 
 export default function Payment(){
@@ -18,10 +19,10 @@ export default function Payment(){
     const [countPrice, setCountPrice] = useState(0);
     const [selectPayment, setSelectPayment] = useState();
     const [valueDelivered, setValueDelivered] = useState();
+    const [display, setDisplay] = useState(false);
     const [username, setUsername] = useState();
     const Header = useContext(MenuHeader);
     const {dataFoods} = useContext(DataFood);
-    const navigate = useNavigate();
     const formPayment = ['Credito', 'Débito', 'Dinheiro'];
 
     useEffect(() => {
@@ -53,8 +54,7 @@ export default function Payment(){
                 };
                 await axios.post(`${DATABASE_URL}/kitchen`, element);
             }
-
-            navigate('/kitchen');
+            setDisplay(true);
         } catch (err) {
             if(err.response.status === 400) return toast.error('Verifique os dados antes de prosseguir');
             toast.error('Algo inesperado aconteceu');
@@ -65,6 +65,7 @@ export default function Payment(){
         <>
             {Header}
             <Page>
+                <ConfirmPayment display={display}/>
                 <Container>
                     <h1><BiSolidWalletAlt /> Pagamento</h1>
                     <ResumePayment>
