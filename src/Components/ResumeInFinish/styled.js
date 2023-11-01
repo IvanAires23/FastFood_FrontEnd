@@ -17,6 +17,9 @@ export const ResumeRequest = styled.div`
         width: 90%;
         display: flex;
         justify-content: space-between;
+        h3,h2{
+            margin-top: 10px;
+        }
     }
 `;
 export const TotalPrice = styled.div`
@@ -27,10 +30,9 @@ export const TotalPrice = styled.div`
 `;
 
 export const FollowUps = styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: flex-start;
+    div{
+        width: 100%;
+    }
     p{
         font-size: 15px;
         padding: 0;
