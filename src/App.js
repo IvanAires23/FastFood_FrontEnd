@@ -12,11 +12,12 @@ function App() {
 
     const [current, setCurrent] = useState(1);
     const [dataFoods, setDataFoods] = useState([]);
+    const [selected, setSelected] = useState('Pedidos');
 
     return (
         <BrowserRouter>
-            <MenuHeader.Provider value={<Top />}>
-                <DataFood.Provider value={{ current, setCurrent, dataFoods, setDataFoods }}>
+            <MenuHeader.Provider value={<Top selected={selected} setSelected={setSelected} />}>
+                <DataFood.Provider value={{ current, setCurrent, dataFoods, setDataFoods, setSelected }}>
                     <Routes>
                         <Route path='/' element={<Home />} />
                         <Route path='/payment' element={<Payment />}/>

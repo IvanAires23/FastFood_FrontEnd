@@ -3,14 +3,22 @@
 import styled from 'styled-components';
 import { Overlay } from '../ConfirmOrder/styled';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import DataFood from '../../Context/DataFood';
 
 export default function ConfirmPayment({ display }){
 
     const navigate = useNavigate();
+    const { setSelected } = useContext(DataFood);
+
+    function goKitchen(){
+        setSelected('Cozinha');
+        navigate('/kitchen');
+    }
 
     return(
         <Overlay display={display}>
-            <Sucess onClick={() => navigate('/kitchen')}>
+            <Sucess onClick={goKitchen}>
                 <Exit>X</Exit>
                 <img src='https://restmonterrey.com/assets/eating_together.svg'/>
                 <h2>Pedido finalizado com sucesso!</h2>

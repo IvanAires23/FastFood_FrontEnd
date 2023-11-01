@@ -1,12 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header, Li } from './styled';
 
-export default function Top(){
+export default function Top({selected, setSelected}){
 
-    const [selected, setSelected] = useState('Pedidos');
     const navigate = useNavigate();
 
     const pages = [{ name: 'Pedidos'}, { name: 'Cozinha'}, { name: 'Retirada'}];
