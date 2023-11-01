@@ -17,9 +17,7 @@ export default function ContainerFood({ checkFood, setCheckFood, setDisplay, cat
             setSelectedOptions([...selectedOptions, product.name]); 
         }
 
-        if(checkFood.includes(product.name)){
-            setCheckFood(checkFood.filter(item => item !== product.name));
-        } else {
+        if(!checkFood.includes(product.name)){
             setCheckFood([...checkFood, product.name]);
         }
         setSelectFood(product);
@@ -37,8 +35,8 @@ export default function ContainerFood({ checkFood, setCheckFood, setDisplay, cat
                             <p>{c.subDescription}</p>
                             <h2>R$ {(c.price / 100).toFixed(2)}</h2>
                         </Datas>
-                        <Check display={selectedOptions.includes(c.name) && checkFood.includes(c.name)}><BiCheck /></Check>
-                        
+                        <Check display={checkFood.includes(c.name)}><BiCheck /></Check>
+                    
                     </BoxFood>
                 ))}
             </Container>
