@@ -16,13 +16,13 @@ export default function MethodsOfPayment({ formPayment, selectPayment, setSelect
     return(
         <>
             {formPayment.map((m, i) => (
-                <Method selectPayment={selectPayment === m } key={i}>
+                <Method onClick={() => handlePaymentClick(m)} selectPayment={selectPayment === m } key={i}>
                     <div>
                         <NameMethod>
                             <BiSolidWalletAlt />
                             <h3>{m}</h3>
                         </NameMethod>
-                        <Selected selectPayment={selectPayment === m } onClick={() => handlePaymentClick(m)}></Selected>
+                        <Selected selectPayment={selectPayment === m }></Selected>
                     </div>
                 </Method>
             ))}
