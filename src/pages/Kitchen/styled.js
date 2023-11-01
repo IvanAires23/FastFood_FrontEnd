@@ -53,6 +53,7 @@ export const ReadyOrCancel = styled.div`
         background-color: rgba(14, 153, 30, 0.2);
         color: rgb(14, 153, 30);
         border: 0;
+        border-radius: 5px;
     }
     button:nth-child(1){
         background-color: rgba(245, 11, 2, 0.2);
