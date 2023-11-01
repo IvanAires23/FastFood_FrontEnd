@@ -14,6 +14,7 @@ export default function Kitchen(){
     const [requests, setRequests] = useState([]);
     const [preparing, setPreparing] = useState([]);
     const [ready, setReady] = useState([]);
+    const [reload, setReload] = useState();
     const Header = useContext(MenuHeader);
     const {setSelected} = useContext(DataFood);
 
@@ -23,6 +24,9 @@ export default function Kitchen(){
             .then(res => setRequests(res.data))
             .catch(err => toast.error(err.response.data.message));
         
+    }, [reload]);
+
+    useEffect(() => {
         findFoodInKitchen();
     }, [requests]);
 
@@ -49,13 +53,13 @@ export default function Kitchen(){
 
     function updateKitchen(id){
         axios.post(`${DATABASE_URL}/kitchen/ready`, { id })
-            .then(() => window.location.reload())
+            .then(() => setReload(reload ? false : true))
             .catch(err => toast.error(err.response.data.message));
     }
 
     function deleteKitchen(id){
         axios.post(`${DATABASE_URL}/kitchen/delete`, { id })
-            .then(() => window.location.reload())
+            .then(() => setReload(reload ? false : true))
             .catch(err => toast.error(err.response.data.message));
     }
     
@@ -65,7 +69,7 @@ export default function Kitchen(){
             <Container>
                 <PreparingReady>
                     <h1>Preparando:</h1>
-                    {preparing.length === 0 ? 'Sem pedidos em preparação no momento' : preparing.map((r, i) => (
+                    {preparing.length === 0 || requests.length === 0 ? 'Sem pedidos em preparação no momento' : preparing.map((r, i) => (
                         <Box key={i}>
                             <img src={r.image} />
                             <div>
@@ -81,7 +85,7 @@ export default function Kitchen(){
                 </PreparingReady>
                 <PreparingReady>
                     <h1>Pronto:</h1>
-                    {ready.length === 0 ? 'Sem pedidos prontos no momento' : ready.map((r, i) => (
+                    {ready.length === 0 || requests.length === 0  ? 'Sem pedidos prontos no momento' : ready.map((r, i) => (
                         <Box key={i}>
                             <img src={r.image} />
                             <div>
