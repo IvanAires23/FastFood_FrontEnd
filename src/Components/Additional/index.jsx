@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { useEffect } from 'react';
 import { Additional, CheckAdd, Circle } from './styled';
 

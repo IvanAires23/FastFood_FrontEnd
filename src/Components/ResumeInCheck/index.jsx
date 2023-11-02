@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { useContext, useEffect, useState } from 'react';
 import DataFood from '../../Context/DataFood';
 import { Resume, ResumeRequest, TotalPrice } from './styled';

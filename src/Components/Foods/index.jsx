@@ -1,5 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-
 import { useState } from 'react';
 import { BiCheck } from 'react-icons/bi';
 import {

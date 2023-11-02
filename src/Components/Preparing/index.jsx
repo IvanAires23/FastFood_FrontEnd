@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/jsx-no-useless-fragment */
-/* eslint-disable react/react-in-jsx-scope */
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import DATABASE_URL from '../../database';
 import { toast } from 'react-toastify';

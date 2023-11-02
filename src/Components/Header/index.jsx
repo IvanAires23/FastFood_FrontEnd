@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unknown-property */
-/* eslint-disable react/react-in-jsx-scope */
 import { useNavigate } from 'react-router-dom';
 import { Header, Li } from './styled';
 

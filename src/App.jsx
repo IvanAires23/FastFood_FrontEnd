@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-/* eslint-disable react/react-in-jsx-scope */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, { useState } from 'react';
 import Home from './pages/Home';

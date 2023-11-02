@@ -1,5 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-
 import { useContext, useEffect, useState } from 'react';
 import {
   FollowUps, Resume, ResumeRequest, TotalPrice,
