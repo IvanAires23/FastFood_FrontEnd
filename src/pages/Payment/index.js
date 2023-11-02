@@ -8,7 +8,7 @@ import axios from 'axios';
 import DATABASE_URL from '../../database';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { Buttons, Cancel, Code, Container, Finish, FormOfPayment, Name, NameAndCode, Page, PurchaseInformation, ResumePayment, ResumeRequest, TotalPrice, Values } from './styled';
+import { Buttons, Cancel, Code, Container, Finish, FormOfPayment, Name, NameAndCode, PurchaseInformation, ResumePayment, ResumeRequest, TotalPrice, Values } from './styled';
 import MethodsOfPayment from '../../Components/Methods';
 import Purchase from '../../Components/PurchaseInformation';
 import ConfirmPayment from '../../Components/ConfirmPayment';
@@ -38,6 +38,7 @@ export default function Payment(){
     }, [dataFoods]); 
 
     async function finishRequest(){
+        scrollTo(0, 0);
         try {
             for (let i = 0; i < dataFoods.length; i++) {
                 let payment;
@@ -65,57 +66,55 @@ export default function Payment(){
     return(
         <>
             {Header}
-            <Page>
-                <ConfirmPayment display={display}/>
-                <Container>
-                    <h1><BiSolidWalletAlt /> Pagamento</h1>
-                    <ResumePayment>
-                        <ResumeRequest>
-                            <h3>Resumo da compra</h3>
-                            <PurchaseInformation>
-                                <Purchase dataFoods={dataFoods}/>
-                                <TotalPrice>
-                                    <h3>Total do pedido</h3>
-                                    <h2>{'R$' + (countPrice / 100).toFixed(2)}</h2> 
-                                </TotalPrice>
-                            </PurchaseInformation>
-                            <NameAndCode>
-                                <Name>
-                                    <label>Nome do cliente</label>
-                                    <input onChange={e => setUsername(e.target.value)} placeholder='Primeiro nome'/>
-                                </Name>
-                                <Code>
-                                    <label>Code</label>
-                                    <input disabled placeholder={dataFoods.map(d => d.code)} />
-                                </Code>
-                            </NameAndCode>
-                        </ResumeRequest>
+            <ConfirmPayment display={display}/>
+            <Container>
+                <h1><BiSolidWalletAlt /> Pagamento</h1>
+                <ResumePayment>
+                    <ResumeRequest>
+                        <h3>Resumo da compra</h3>
+                        <PurchaseInformation>
+                            <Purchase dataFoods={dataFoods}/>
+                            <TotalPrice>
+                                <h3>Total do pedido</h3>
+                                <h2>{'R$' + (countPrice / 100).toFixed(2)}</h2> 
+                            </TotalPrice>
+                        </PurchaseInformation>
+                        <NameAndCode>
+                            <Name>
+                                <label>Nome do cliente</label>
+                                <input onChange={e => setUsername(e.target.value)} placeholder='Primeiro nome'/>
+                            </Name>
+                            <Code>
+                                <label>Code</label>
+                                <input disabled placeholder={dataFoods.map(d => d.code)} />
+                            </Code>
+                        </NameAndCode>
+                    </ResumeRequest>
                     
-                        <FormOfPayment>
+                    <FormOfPayment>
+                        <div>
+                            <h3>Selecione a forma de pagamento:</h3>
+                            <MethodsOfPayment formPayment={formPayment} selectPayment={selectPayment} setSelectPayment={setSelectPayment} />
+                        </div>
+                        <Values>
                             <div>
-                                <h3>Selecione a forma de pagamento:</h3>
-                                <MethodsOfPayment formPayment={formPayment} selectPayment={selectPayment} setSelectPayment={setSelectPayment} />
+                                <label>Valor Entregue (R$)</label>
+                                <input onChange={e => setValueDelivered(e.target.value)} placeholder={(countPrice / 100).toFixed(2)}/>
                             </div>
-                            <Values>
-                                <div>
-                                    <label>Valor Entregue (R$)</label>
-                                    <input onChange={e => setValueDelivered(e.target.value)} placeholder={(countPrice / 100).toFixed(2)}/>
-                                </div>
-                                <div>
-                                    <label>Troco (R$)</label>
-                                    <input disabled placeholder={(valueDelivered * 100) - countPrice > 0 && valueDelivered !== countPrice ? `${(((valueDelivered * 100) - countPrice) / 100).toFixed(2)}`: '0.00'}/>
-                                </div>
-                            </Values>
-                        </FormOfPayment>
-                    </ResumePayment>
+                            <div>
+                                <label>Troco (R$)</label>
+                                <input disabled placeholder={(valueDelivered * 100) - countPrice > 0 && valueDelivered !== countPrice ? `${(((valueDelivered * 100) - countPrice) / 100).toFixed(2)}`: '0.00'}/>
+                            </div>
+                        </Values>
+                    </FormOfPayment>
+                </ResumePayment>
                     
-                    <Buttons>
-                        <Link to={'/'}><Cancel>Cancelar</Cancel></Link>
-                        <Finish onClick={finishRequest}>Finalizar pedido</Finish>
-                    </Buttons>
-                </Container>
-                <ToastContainer />
-            </Page>
+                <Buttons>
+                    <Link to={'/'}><Cancel>Cancelar</Cancel></Link>
+                    <Finish onClick={finishRequest}>Finalizar pedido</Finish>
+                </Buttons>
+            </Container>
+            <ToastContainer />
         </>
     );
 }

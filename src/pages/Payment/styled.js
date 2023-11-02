@@ -1,20 +1,13 @@
 import styled from 'styled-components';
 
-export const Page = styled.div`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
 export const Container = styled.div`
     width: 90%;
     height: calc(80vh - 40px);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    padding: 1%;
+    padding: 2%;
+    margin: 60px auto;
     h1{
         font-size: 29px;
         display: flex;
@@ -33,7 +26,7 @@ export const ResumePayment = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 0 2%;
+    padding-right: 2%;
     >div >h3{
         font-weight: 700;
         margin-bottom: 10px;
@@ -90,12 +83,16 @@ export const NameAndCode = styled.div`
         display: flex;
         flex-direction: column;
         height: 30px;
-        margin-top: 15px;
+        margin: 15px 0;
         label{
             font-size: 20px;
             font-weight: 700;
             margin-right: 10px;
         }
+    }
+
+    @media (max-width: 500px){
+        flex-direction: column;
     }
 `;
 
@@ -124,7 +121,7 @@ export const FormOfPayment = styled.div`
     }
     @media (max-width: 1000px){
         width: 100%;
-        margin-bottom: 100px;
+        padding-left: 0;
     }
 `;
 
@@ -134,21 +131,24 @@ export const Values = styled.div`
     div{
         display: flex;  
         flex-direction: column;
+        margin-top: 15px;
         label{
             font-weight: 700;
             font-size: 20px;
-            margin-bottom: 10px;
         }
         input{
             width: 90%;
         }
+    }
+
+    @media (max-width: 1140px){
+        flex-direction: column;
     }
 `;
 
 export const Buttons = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 300px;
     margin-top: 80px;
     button{
         display: flex;
@@ -159,31 +159,37 @@ export const Buttons = styled.div`
         cursor: pointer;
         font-weight: 700;
         margin-right: 45px;
+        border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};
+        border-radius: 15px;
         @media (max-width: 736px){
             margin-right: 0;
             width: 200px;
+            margin-top: 15px;
+            
         }
     }
     a{
         text-decoration: none;
     }
     @media (max-width: 736px){
-            justify-content: space-around;
+        margin-right: 0;
+        margin-top: 50px;
+        justify-content: space-around;
+        align-items: center;
+        
+    }
+    @media (max-width: 500px){
+        flex-direction: column;
     }
 `;
 
 export const Cancel = styled.button`  
     background-color: #FFFFFF;
-    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
-    border-radius: 15px;
     color: ${props => props.disabled ? '#ccc' : '#00b50c'};
 `;
 
 export const Finish = styled.button`
-    background-color: ${props => props.disabled ? '#ccc' : '#00b50c'};;
-    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
-    border-radius: 15px;
-    color: #FFFFFF;
-    
+    background-color: ${props => props.disabled ? '#ccc' : '#00b50c'};
+    color: #FFFFFF;  
 `;
 
