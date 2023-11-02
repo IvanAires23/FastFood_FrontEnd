@@ -16,11 +16,14 @@ export const PreparingReady = styled.div`
             font-weight: 700;
             margin-bottom: 15px;
         }
+        @media (max-width: 1030px){
+            display: flex;
+            flex-direction: column;
+        }
 `;
 
 export const Line = styled.div`
     width: 5px;
-    height: 88vh;
     background-color: black;
     border-radius: 5px;
     margin-right: 15px;
@@ -32,6 +35,10 @@ export const Box = styled.div`
     box-shadow: 3px 3px 6px #ccc;
     width: 70%;
     margin-top: 20px;
+    @media (max-width: 1030px){
+        width: 60%;
+        height: 240px;
+    }
     
 `;
 
@@ -48,6 +55,9 @@ export const Obs = styled.div`
         resize: none;
         padding: 2%;
     }
+    @media (max-width: 1030px){
+        display: none;
+    }
 `;
 
 export const Infos = styled.div`
@@ -60,6 +70,10 @@ export const Infos = styled.div`
     margin-top: 20px;
     img{
         width: 90px;
+    }
+    @media (max-width: 1030px){
+        flex-direction: column;
+        height: 85%;
     }
 `;
 

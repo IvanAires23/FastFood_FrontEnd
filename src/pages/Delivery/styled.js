@@ -15,10 +15,16 @@ export const PreparingReady = styled.div`
             font-size: 60px;
             font-weight: 700;
             margin-bottom: 15px;
+            @media (max-width: 782px){
+                font-size: 35px;
+            }
         }
         h2{
             font-size: 68px;
             font-weight: 700;
+            @media (max-width: 782px){
+                font-size: 38px;
+            }
         }
         h2.preparing{
             color: #ccc;
@@ -29,7 +35,7 @@ export const PreparingReady = styled.div`
 `;
 
 export const Line = styled.div`
-    width: 10px;
+    width: 5px;
     background-color: black;
     border-radius: 5px;
     margin-right: 15px;
