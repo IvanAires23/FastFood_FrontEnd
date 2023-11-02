@@ -5,7 +5,10 @@ export const Resume = styled.div`
     height: 190px;
     display: flex;
     flex-direction: column;
-    padding: 0 4%;
+    padding: 2%;
+    @media (max-width: 500px){
+        height: 160px;
+    }
 `;
 export const ResumeRequest = styled.div`
     display: flex;
