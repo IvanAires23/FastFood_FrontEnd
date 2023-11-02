@@ -6,36 +6,28 @@ export const Buttons = styled.div`
     position: absolute;
     right: 0;
     margin-bottom: 300px;
+    button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 250px;
+        height: 50px;
+        margin-right: 45px;
+        cursor: pointer;
+        font-weight: 700;
+        border: 1px solid #00b50c;
+    border-radius: 15px;
+    }
 `;
 
-export const Continue = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 50px;
-    margin-right: 30px;
-    cursor: pointer;
+export const Continue = styled.button`
     background-color: #FFFFFF;
-    border: 1px solid #00b50c;
-    border-radius: 15px;
     color: #00b50c;
-    font-weight: 700;
 `;
 
-export const AddCar = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 50px;
-    margin-right: 50px;
+export const AddCar = styled.button`
     background-color: #00b50c;
-    border: 1px solid #00b50c;
-    border-radius: 15px;
-    cursor: pointer;
     color: #FFFFFF;
-    font-weight: 700;
 `;
 
 export const Overlay = styled.div`

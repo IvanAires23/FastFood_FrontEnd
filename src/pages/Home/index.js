@@ -103,7 +103,7 @@ export default function Home() {
             {Header}
             <Container selectFood={selectFood} display={display}>
                 <Menu>
-                    {selectFood ? <ConfirmOrder observation={observation} setObservation={setObservation} checkFood={checkFood} setCheckFood={setCheckFood} setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} display={display} product={selectFood} setSelectFood={setSelectFood} /> : ''}
+                    {selectFood && <ConfirmOrder observation={observation} setObservation={setObservation} checkFood={checkFood} setCheckFood={setCheckFood} setProductInCar={setProductInCar} productInCar={productInCar} setDisplay={setDisplay} display={display} product={selectFood} setSelectFood={setSelectFood} /> }
                     <Search>
                         <h1>Seja bem vindo!</h1>
                         <input onKeyDown={e => send(e)} onChange={e => setSearchFood(e.target.value)} placeholder='O que você procura?' />

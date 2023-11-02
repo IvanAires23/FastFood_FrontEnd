@@ -30,7 +30,8 @@ export function ConfirmOrder(props) {
         }
     }
 
-    function finishRequest() {
+    function finishRequest(e) {
+        e.preventDefault();
         setCurrent(1);
         const car = [...props.productInCar, { ...props.product, totalAdds, current, observation: props.observation }];
         props.setProductInCar(car);
@@ -38,11 +39,13 @@ export function ConfirmOrder(props) {
         setSelectedOptions([]);
     }
 
+
+
     return (
         <Overlay display={props.display}>
             <Order>
                 <h2>Revise seu pedido</h2>
-                <p onClick={() => {props.setSelectFood(false); setSelectedOptions([]); props.setCheckFood(props.checkFood.filter(item => item !== props.product.name)); props.setObservation();}}>X</p>
+                <p onClick={() => {props.setSelectFood(false); setSelectedOptions([]); props.setCheckFood(props.checkFood.filter(item => item !== props.product.id));}}>X</p>
                 <div>
                     <Revision>
                         <img src={props.product.image} alt={props.product.image} />
@@ -69,8 +72,8 @@ export function ConfirmOrder(props) {
                 <InfosRequest product={props.product} totalAdds={totalAdds} />
 
                 <Buttons>
-                    <Continue onClick={() => finishRequest()}>Continuar adicionando</Continue>
-                    <AddCar onClick={() => finishRequest()} >Finalizar Pedido</AddCar>
+                    <Continue onClick={finishRequest}>Continuar adicionando</Continue>
+                    <AddCar onClick={finishRequest} >Finalizar Pedido</AddCar>
                 </Buttons>
             </Order>
         </Overlay>
