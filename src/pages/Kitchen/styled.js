@@ -19,21 +19,45 @@ export const PreparingReady = styled.div`
 `;
 
 export const Line = styled.div`
-    width: 10px;
+    width: 5px;
+    height: 88vh;
     background-color: black;
     border-radius: 5px;
     margin-right: 15px;
 `;
 
 export const Box = styled.div`
-    width: 70%;
-    height: 80px;
+    display: flex;
+    flex-direction: column;
     box-shadow: 3px 3px 6px #ccc;
+    width: 70%;
+    margin-top: 20px;
+    
+`;
+
+export const Obs = styled.div`
+    width: 100%;
+    margin-top: 5px;
+    h2{
+        font-size: 15px;
+        font-weight: 700;
+    }
+    textarea{
+        width: 100%;
+        height: 100px;
+        resize: none;
+        padding: 2%;
+    }
+`;
+
+export const Infos = styled.div`
+    width: 100%;
+    height: 80px;
     display: flex;
     padding: 0 2%;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-top: 20px;
     img{
         width: 90px;
     }
