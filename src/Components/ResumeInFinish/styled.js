@@ -30,6 +30,8 @@ export const TotalPrice = styled.div`
 `;
 
 export const FollowUps = styled.div`
+    display: flex;
+    flex-direction: column;
     div{
         width: 100%;
     }
