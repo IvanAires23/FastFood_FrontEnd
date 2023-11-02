@@ -1,3 +1,3 @@
-const DATABASE_URL='http://localhost:4000';
+const DATABASE_URL='https://fastfoodapi-vrho.onrender.com';
 
 export default DATABASE_URL;
