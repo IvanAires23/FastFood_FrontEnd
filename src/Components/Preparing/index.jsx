@@ -23,7 +23,6 @@ export default function Preparing({ preparing, requests }) {
   }
 
   async function deleteKitchen(food) {
-    console.log(food);
     for (let i = 0; i < requests.length; i++) {
       if (food.id === requests[i].foodId) {
         await axios.post(`${DATABASE_URL}/kitchen/delete`, { id: requests[i].id })
