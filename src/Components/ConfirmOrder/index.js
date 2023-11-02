@@ -7,6 +7,7 @@ import OptionsAdditional from '../Additional';
 import InfosRequest from '../ResumeInCheck';
 import DataFood from '../../Context/DataFood';
 import { AddCar, AddSub, Buttons, Continue, Count, Obs, Order, Overlay, Revision } from './styled';
+import { AiOutlineClose } from 'react-icons/ai';
 
 export function ConfirmOrder(props) {
 
@@ -45,7 +46,7 @@ export function ConfirmOrder(props) {
         <Overlay display={props.display}>
             <Order>
                 <h2>Revise seu pedido</h2>
-                <p onClick={() => {props.setSelectFood(false); setSelectedOptions([]); props.setCheckFood(props.checkFood.filter(item => item !== props.product.id));}}>X</p>
+                <AiOutlineClose onClick={() => {props.setSelectFood(false); setSelectedOptions([]); props.setCheckFood(props.checkFood.filter(item => item !== props.product.id));}} />
                 <div>
                     <Revision>
                         <img src={props.product.image} alt={props.product.image} />
@@ -58,8 +59,8 @@ export function ConfirmOrder(props) {
                                 <AddSub onClick={() => alterCurrent('add')}><IoMdAdd /></AddSub>
                             </Count>
                         </div>
+                        <h2>{'R$' + (props.product.price / 100).toFixed(2)}</h2>
                     </Revision>
-                    <h2>{'R$' + (props.product.price / 100).toFixed(2)}</h2>
                 </div>
 
                 <OptionsAdditional adds={adds} setTotalAdds={setTotalAdds} selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />

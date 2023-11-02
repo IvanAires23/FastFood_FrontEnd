@@ -15,7 +15,7 @@ export const Overlay = styled.div`
 `;
 
 export const Order = styled.form`
-    width: 65%;
+    width: 80%;
     padding: 2%;
     background-color: #FFFFFF;
     position: relative;
@@ -27,29 +27,38 @@ export const Order = styled.form`
     border: none;
     padding-bottom: 8%;
     transition: 500ms;
+    >h2{
+        font-weight: 700;
+        font-size: 20px;
+        margin: 25px 0;
+    }
     >div{
         display: flex;
         justify-content: space-around;
-        margin-bottom: 30px
+        margin-bottom: 30px;
+        @media (max-width: 400px){
+            justify-content: space-between;
+        }
     }
-    >p{
+    >svg{
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 15px;
+        right: 20px;
+        font-weight: 700;
+        font-size: 30px;
         cursor: pointer;
-    }
-    @media (max-width: 600px){
-        width: 80%;
     }
 `;
 
 export const Revision = styled.div`
-    margin-top: 15px;
-    width: 400px;
+    width: 80%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     img{
         width: 120px;
+        @media (max-width: 625px){
+            width: 100px;
+        }
     }
     >div{
         width: 50%;
