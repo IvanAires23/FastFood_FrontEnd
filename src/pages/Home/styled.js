@@ -1,44 +1,6 @@
 import styled from 'styled-components';
 
-export const Buttons = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 300px;
-    margin-top: 15px;
-    a{
-        text-decoration: none;
-    }
-`;
 
-export const Continue = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 50px;
-    margin-right: 30px;
-    cursor: pointer;
-    background-color: #FFFFFF;
-    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
-    border-radius: 15px;
-    color: ${props => props.disabled ? '#ccc' : '#00b50c'};
-    font-weight: 700;
-`;
-
-export const Finish = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 50px;
-    margin-right: 50px;
-    background-color: ${props => props.disabled ? '#ccc' : '#00b50c'};;
-    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
-    border-radius: 15px;
-    cursor: pointer;
-    color: #FFFFFF;
-    font-weight: 700;
-`;
 
 export const Container = styled.div`
     display: flex;
@@ -89,7 +51,9 @@ export const Categories = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        flex-wrap: wrap;
     }
+    
 `;
 
 export const Products = styled.div`
@@ -107,7 +71,51 @@ export const Box = styled.div`
     align-items: center;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
     img{
-        width: 100px;
+        width: 60%;
+    } 
+`;
+
+export const Buttons = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+    margin-top: 15px;
+    @media (max-width: 880px){
+            justify-content: space-around;
+        }
+    button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 250px;
+        height: 50px;
+        cursor: pointer;
+        font-weight: 700;
+        border-radius: 15px;
+        margin-right: 45px;
+        @media (max-width: 880px){
+            margin-right: 0;
+            width: 200px;
+        }
+        @media (max-width: 560px) {
+            width: 180px;
+        }
     }
+    a{
+        text-decoration: none;
+    }
+`;
+
+export const Continue = styled.button`
+    background-color: #FFFFFF;
+    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
+    color: ${props => props.disabled ? '#ccc' : '#00b50c'};
+`;
+
+export const Finish = styled.button`
+    background-color: ${props => props.disabled ? '#ccc' : '#00b50c'};;
+    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};; 
+    color: #FFFFFF;
 `;

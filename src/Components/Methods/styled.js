@@ -27,6 +27,9 @@ export const Method = styled.div`
         padding: 0 4%;
         height: 40px;
     }
+    @media (max-width: 1000px){
+        width: 100%;
+    }
 `;
 
 export const NameMethod = styled.div`

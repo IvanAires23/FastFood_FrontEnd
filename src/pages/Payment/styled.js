@@ -38,10 +38,18 @@ export const ResumePayment = styled.div`
         font-weight: 700;
         margin-bottom: 10px;
     }
+    @media (max-width: 1000px){
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 
 export const ResumeRequest = styled.div`
     width: 50%;
+    @media (max-width: 1000px){
+        width: 100%;
+        margin-bottom: 100px;
+    }
 `;
 
 export const PurchaseInformation = styled.div`
@@ -114,6 +122,10 @@ export const FormOfPayment = styled.div`
     >div >h3{
         font-weight: 700;
     }
+    @media (max-width: 1000px){
+        width: 100%;
+        margin-bottom: 100px;
+    }
 `;
 
 export const Values = styled.div`
@@ -138,37 +150,40 @@ export const Buttons = styled.div`
     justify-content: flex-end;
     margin-bottom: 300px;
     margin-top: 80px;
+    button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 250px;
+        height: 50px;
+        cursor: pointer;
+        font-weight: 700;
+        margin-right: 45px;
+        @media (max-width: 736px){
+            margin-right: 0;
+            width: 200px;
+        }
+    }
     a{
         text-decoration: none;
     }
+    @media (max-width: 736px){
+            justify-content: space-around;
+    }
 `;
 
-export const Cancel = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 50px;
-    cursor: pointer;
+export const Cancel = styled.button`  
     background-color: #FFFFFF;
     border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
     border-radius: 15px;
     color: ${props => props.disabled ? '#ccc' : '#00b50c'};
-    font-weight: 700;
 `;
 
 export const Finish = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 50px;
-    margin: 0 50px;
     background-color: ${props => props.disabled ? '#ccc' : '#00b50c'};;
     border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
     border-radius: 15px;
-    cursor: pointer;
     color: #FFFFFF;
-    font-weight: 700;
+    
 `;
 
