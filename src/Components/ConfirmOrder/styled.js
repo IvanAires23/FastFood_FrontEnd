@@ -1,44 +1,5 @@
 import styled from 'styled-components';
 
-export const Buttons = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    position: absolute;
-    right: 0;
-    margin-bottom: 300px;
-    button{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 250px;
-        height: 50px;
-        margin-right: 45px;
-        cursor: pointer;
-        font-weight: 700;
-        border: 1px solid #00b50c;
-        border-radius: 15px;
-        @media (max-width: 980px){
-            margin-right: 0;
-            margin-bottom: 10px;
-        }
-    }
-    @media (max-width: 980px){
-        width: 100%;
-        align-items: center;
-        flex-direction: column;
-    }
-`;
-
-export const Continue = styled.button`
-    background-color: #FFFFFF;
-    color: #00b50c;
-`;
-
-export const AddCar = styled.button`
-    background-color: #00b50c;
-    color: #FFFFFF;
-`;
-
 export const Overlay = styled.div`
     position: absolute;
     display: ${props => props.display ? 'flex' : 'none'};
@@ -58,13 +19,14 @@ export const Order = styled.form`
     padding: 2%;
     background-color: #FFFFFF;
     position: relative;
-    margin-top: 20px;
+    margin: 20px 0;
     z-index: 4;
     border-radius: 5px;
     overflow: scroll;
     max-height: 90vh;
     border: none;
     padding-bottom: 8%;
+    transition: 500ms;
     >div{
         display: flex;
         justify-content: space-around;
@@ -75,6 +37,9 @@ export const Order = styled.form`
         top: 10px;
         right: 10px;
         cursor: pointer;
+    }
+    @media (max-width: 600px){
+        width: 80%;
     }
 `;
 
@@ -140,4 +105,43 @@ export const Obs = styled.div`
         border-radius: 10px;
         resize: none;
     }
+`;
+
+export const Buttons = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 0;
+    margin-bottom: 300px;
+    button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 250px;
+        height: 50px;
+        margin-right: 45px;
+        cursor: pointer;
+        font-weight: 700;
+        border: 1px solid #00b50c;
+        border-radius: 15px;
+        @media (max-width: 980px){
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+    }
+    @media (max-width: 980px){
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+    }
+`;
+
+export const Continue = styled.button`
+    background-color: #FFFFFF;
+    color: #00b50c;
+`;
+
+export const AddCar = styled.button`
+    background-color: #00b50c;
+    color: #FFFFFF;
 `;

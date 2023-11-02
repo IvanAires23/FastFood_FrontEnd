@@ -15,6 +15,9 @@ export const Menu = styled.div`
     width: 80%;
     display: flex;
     flex-direction: column;
+    @media (max-width: 700px){
+        margin-top: 20px;
+    }
 `;
 
 export const Search = styled.div`
@@ -84,7 +87,9 @@ export const Buttons = styled.div`
     margin-top: 15px;
     @media (max-width: 880px){
             justify-content: space-around;
-        }
+            flex-direction: column;
+            align-items: center;
+    }
     button{
         display: flex;
         justify-content: center;
@@ -98,9 +103,7 @@ export const Buttons = styled.div`
         @media (max-width: 880px){
             margin-right: 0;
             width: 200px;
-        }
-        @media (max-width: 560px) {
-            width: 180px;
+            margin-bottom: 15px;
         }
     }
     a{
