@@ -16,7 +16,16 @@ export const Buttons = styled.div`
         cursor: pointer;
         font-weight: 700;
         border: 1px solid #00b50c;
-    border-radius: 15px;
+        border-radius: 15px;
+        @media (max-width: 980px){
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+    }
+    @media (max-width: 980px){
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
     }
 `;
 
