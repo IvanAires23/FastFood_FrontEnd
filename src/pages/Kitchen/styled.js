@@ -19,6 +19,7 @@ export const PreparingReady = styled.div`
         @media (max-width: 1030px){
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
 `;
 

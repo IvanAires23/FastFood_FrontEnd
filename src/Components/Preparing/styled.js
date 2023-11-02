@@ -8,7 +8,7 @@ export const Box = styled.div`
     margin-top: 20px;
     @media (max-width: 1030px){
         width: 60%;
-        height: 240px;
+        height: 500px;
     }
     
 `;
@@ -26,9 +26,6 @@ export const Obs = styled.div`
         resize: none;
         padding: 2%;
     }
-    @media (max-width: 1030px){
-        display: none;
-    }
 `;
 
 export const Infos = styled.div`
@@ -41,6 +38,9 @@ export const Infos = styled.div`
     margin-top: 20px;
     img{
         width: 90px;
+        @media (max-width: 820px) {
+            width: 70px;
+        }
     }
     @media (max-width: 1030px){
         flex-direction: column;
@@ -67,5 +67,19 @@ export const ReadyOrCancel = styled.div`
     button:nth-child(1){
         background-color: rgba(245, 11, 2, 0.2);
         color: rgb(245, 11, 2)
+    }
+    @media (max-width: 1030px){
+        width: 35%;
+        justify-content: space-around;
+        button{
+            margin: 15px 0;
+        }
+    }
+    @media (max-width: 820px){
+        flex-direction: column;
+        align-items: center;
+        button{
+            margin: 10px 0;
+        }
     }
 `;
