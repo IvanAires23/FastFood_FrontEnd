@@ -16,7 +16,7 @@ export const PreparingReady = styled.div`
             font-weight: 700;
             margin-bottom: 15px;
             @media (max-width: 782px){
-                font-size: 35px;
+                font-size: 20px;
             }
         }
         h2{
