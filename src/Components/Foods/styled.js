@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+
 export const Container = styled.div`
     width: 100%;
-    height: ${props => props.heights};
+    height: ${(props) => props.heights};
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -57,7 +58,7 @@ export const Datas = styled.div`
 
 export const Check = styled.div`
     position: absolute;
-    display: ${props => props.display ? 'flex' : 'none'};
+    display: ${(props) => (props.display ? 'flex' : 'none')};
     justify-content: center;
     align-items: center;
     font-size: 70px;

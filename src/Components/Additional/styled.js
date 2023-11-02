@@ -34,5 +34,5 @@ export const Circle = styled.div`
     border: 1px solid #00b50c;
     border-radius: 10px;
     cursor: pointer;
-    background-color: ${props => props.selected ? '#00b50c' : ''};
+    background-color: ${(props) => (props.selected ? '#00b50c' : '')};
 `;

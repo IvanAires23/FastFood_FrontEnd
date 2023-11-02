@@ -84,7 +84,7 @@ export const NameAndCode = styled.div`
         flex-direction: column;
         height: 30px;
         margin: 15px 0;
-        label{
+        span{
             font-size: 20px;
             font-weight: 700;
             margin-right: 10px;
@@ -132,7 +132,7 @@ export const Values = styled.div`
         display: flex;  
         flex-direction: column;
         margin-top: 15px;
-        label{
+        span{
             font-weight: 700;
             font-size: 20px;
         }
@@ -159,7 +159,7 @@ export const Buttons = styled.div`
         cursor: pointer;
         font-weight: 700;
         margin-right: 45px;
-        border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};
+        border: 1px solid ${(props) => (props.disabled ? '#ccc' : '#00b50c')};
         border-radius: 15px;
         @media (max-width: 736px){
             margin-right: 0;
@@ -185,11 +185,10 @@ export const Buttons = styled.div`
 
 export const Cancel = styled.button`  
     background-color: #FFFFFF;
-    color: ${props => props.disabled ? '#ccc' : '#00b50c'};
+    color: ${(props) => (props.disabled ? '#ccc' : '#00b50c')};
 `;
 
 export const Finish = styled.button`
-    background-color: ${props => props.disabled ? '#ccc' : '#00b50c'};
+    background-color: ${(props) => (props.disabled ? '#ccc' : '#00b50c')};
     color: #FFFFFF;  
 `;
-

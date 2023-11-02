@@ -29,5 +29,3 @@ export const Line = styled.div`
     border-radius: 5px;
     margin-right: 15px;
 `;
-
-

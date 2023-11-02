@@ -32,5 +32,5 @@ export const Li = styled.li`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    background-color: ${props => props.selected ? '#0a731c': 'none'};
+    background-color: ${(props) => (props.selected ? '#0a731c' : 'none')};
 `;

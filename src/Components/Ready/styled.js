@@ -59,14 +59,8 @@ export const ReadyOrCancel = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgba(14, 153, 30, 0.2);
-        color: rgb(14, 153, 30);
         border: 0;
         border-radius: 5px;
-    }
-    button:nth-child(1){
-        background-color: rgba(245, 11, 2, 0.2);
-        color: rgb(245, 11, 2)
     }
     @media (max-width: 1030px){
         width: 35%;
@@ -82,4 +76,14 @@ export const ReadyOrCancel = styled.div`
             margin: 10px 0;
         }
     }
+`;
+
+export const Ready = styled.button`
+    background-color: rgba(14, 153, 30, 0.2);
+    color: rgb(14, 153, 30);
+`;
+
+export const Cancel = styled.button`
+    background-color: rgba(245, 11, 2, 0.2);
+    color: rgb(245, 11, 2)
 `;

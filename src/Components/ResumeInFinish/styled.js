@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Resume = styled.div`
     border: 1px solid #00b50c;
-    display: ${props => props.display ? 'flex' : 'none'};
+    display: ${(props) => (props.display ? 'flex' : 'none')};
     flex-direction: column;
     justify-content: center;
     padding: 2% 4%;

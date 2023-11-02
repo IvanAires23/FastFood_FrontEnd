@@ -12,7 +12,7 @@ export const Methods = styled.div`
 export const Method = styled.div`
     width: 80%;
     height: 80px;
-    border: 1px solid ${props => props.selectPayment ? '#10b32c': '#ccc'};
+    border: 1px solid ${(props) => (props.selectPayment ? '#10b32c' : '#ccc')};
     transition: 300ms;
     border-radius: 10px;
     display: flex;
@@ -46,5 +46,5 @@ export const Selected = styled.div`
     border-radius: 10px;
     border: 1px solid #10b32c;
     transition: 300ms;
-    background-color: ${props => props.selectPayment ? '#10b32c': '#FFFFF'};
+    background-color: ${(props) => (props.selectPayment ? '#10b32c' : '#FFFFF')};
 `;

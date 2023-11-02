@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Overlay = styled.div`
     position: absolute;
-    display: ${props => props.display ? 'flex' : 'none'};
+    display: ${(props) => (props.display ? 'flex' : 'none')};
     justify-content: center;
     align-items: center;
     left:0;
@@ -36,7 +36,7 @@ export const Order = styled.form`
         display: flex;
         justify-content: space-around;
         margin-bottom: 30px;
-        @media (max-width: 400px){
+        @media (max-width: 480px){
             justify-content: space-between;
         }
     }
@@ -57,11 +57,13 @@ export const Revision = styled.div`
     img{
         width: 120px;
         @media (max-width: 625px){
-            width: 100px;
+            width: 90px;
+            height: 90px;
         }
     }
     >div{
         width: 50%;
+        margin-left: 20px;
         h2{
             font-size: 20px;
             font-weight: 700;
@@ -71,6 +73,9 @@ export const Revision = styled.div`
             font-size: 15px;
             font-size: 400;
             margin-bottom: 23px;
+        }
+        @media (max-width: 480px){
+            margin-left: 0;
         }
     }
 `;

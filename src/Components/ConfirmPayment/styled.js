@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Overlay = styled.div`
     position: absolute;
-    display: ${props => props.display ? 'flex' : 'none'};
+    display: ${(props) => (props.display ? 'flex' : 'none')};
     justify-content: center;
     align-items: center;
     left:0;

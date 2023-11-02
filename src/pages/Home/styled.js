@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
-
-
 export const Container = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
     padding: 2%;
-    position: ${props => props.selectFood && props.display ? 'fixed' : 'relative'};
+    position: ${(props) => (props.selectFood && props.display ? 'fixed' : 'relative')};
     margin-top: 30px;
 `;
 
@@ -113,12 +111,12 @@ export const Buttons = styled.div`
 
 export const Continue = styled.button`
     background-color: #FFFFFF;
-    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};;
-    color: ${props => props.disabled ? '#ccc' : '#00b50c'};
+    border: 1px solid ${(props) => (props.disabled ? '#ccc' : '#00b50c')};;
+    color: ${(props) => (props.disabled ? '#ccc' : '#00b50c')};
 `;
 
 export const Finish = styled.button`
-    background-color: ${props => props.disabled ? '#ccc' : '#00b50c'};;
-    border: 1px solid ${props => props.disabled ? '#ccc' : '#00b50c'};; 
+    background-color: ${(props) => (props.disabled ? '#ccc' : '#00b50c')};;
+    border: 1px solid ${(props) => (props.disabled ? '#ccc' : '#00b50c')};; 
     color: #FFFFFF;
 `;
