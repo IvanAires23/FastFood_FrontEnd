@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# FastFood
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FastFood is a fast food ordering application powered by React, designed to provide a quick and easy way to manage restaurant orders.
 
-## Available Scripts
+<img src="./assets/2023-11-02-23-17-05.gif" />
 
-In the project directory, you can run:
+Try it out now at: https://fast-food-front-end.vercel.app/
 
-### `npm start`
+## About
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This is a project focused on managing fast food, where it is possible for the user to track the order from registration to pickup. Having a modern and responsive design, it features features such as:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-   Home: On the home page it is possible to view all the food available in the restaurant, being able to search for the desired food by name or code, select the one ordered, define the quantity, extras and add it to the cart.
 
-### `npm test`
+-   Payment: On the payment page, it is possible to review the purchase data, enter the customer's name, define the payment method and define the amount that will be delivered to the cashier.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-   Kitchen: On the kitchen page, it is possible to see the orders that are being prepared and those that are already ready, it is also possible to check if the order is ready and cancel the order.
 
-### `npm run build`
+-   Delivery: On the delivery page, it is possible to see the names of customers who have their order ready and who are not yet.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+By using this application, fast food can manage all purchases in the establishment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technologies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The following tools and frameworks were used in the construction of the project:<br>
 
-### `npm run eject`
+<p>
+  <img  height="30" src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+  <img  height="30" src="https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white">
+  <img  height="30" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
+  <img  height="30" src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=ffffff">
+  <img  height="30" src="https://img.shields.io/badge/Babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=ffffff">
+  <img  height="30" src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=ffffff">
+</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## How to run
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone this repository
+2. Clone the back-end repository at https://github.com/IvanAires23/FastFood_BackEnd
+3. Follow instructions to run back-end at https://github.com/IvanAires23/FastFood_BackEnd
+4. Install dependencies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm i
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. Run the front-end with
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+6. You can optionally build the project running
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run build
+```
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+7. Finally access http://localhost:3000 on your favorite browser
