@@ -28,7 +28,7 @@ import ConfirmPayment from '../../Components/ConfirmPayment';
 export default function Payment() {
   const [countPrice, setCountPrice] = useState(0);
   const [selectPayment, setSelectPayment] = useState();
-  const [valueDelivered, setValueDelivered] = useState();
+  const [valueDelivered, setValueDelivered] = useState('');
   const [display, setDisplay] = useState(false);
   const [username, setUsername] = useState();
   const Header = useContext(MenuHeader);
@@ -43,16 +43,14 @@ export default function Payment() {
         count += dataFoods[i].totalAdds[j].price;
       }
     }
-    setValueDelivered(count);
+    setValueDelivered((count / 100).toFixed(2));
     setCountPrice(count);
   }, [dataFoods]);
 
   async function finishRequest() {
-    if (!valueDelivered) {
-      setValueDelivered(countPrice);
-    } else if (!parseInt(valueDelivered, 10)) {
+    if (!parseInt(valueDelivered, 10)) {
       return toast.error('Valor definido é incorreto');
-    } else if (valueDelivered < (countPrice / 100)) {
+    } if (valueDelivered < (countPrice / 100)) {
       return toast.error('Valor definido é insuficiente');
     }
     // eslint-disable-next-line no-restricted-globals
@@ -76,6 +74,7 @@ export default function Payment() {
       }
       setDisplay(true);
     } catch (err) {
+      console.log(valueDelivered);
       toast.error(err.response.data.message);
     }
   }
