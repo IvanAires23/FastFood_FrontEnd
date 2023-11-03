@@ -48,6 +48,13 @@ export default function Payment() {
   }, [dataFoods]);
 
   async function finishRequest() {
+    if (!valueDelivered) {
+      setValueDelivered(countPrice);
+    } else if (!parseInt(valueDelivered, 10)) {
+      return toast.error('Valor definido é incorreto');
+    } else if (valueDelivered < (countPrice / 100)) {
+      return toast.error('Valor definido é insuficiente');
+    }
     // eslint-disable-next-line no-restricted-globals
     scrollTo(0, 0);
     try {
@@ -57,11 +64,11 @@ export default function Payment() {
         else if (selectPayment === 'Débito') payment = 'DEBIT';
         else if (selectPayment === 'Credito') payment = 'CREDIT';
         const element = {
-          money: 'countPrice',
+          valueDelivered,
           payment,
           name: username,
           foodId: dataFoods[i].id,
-          change: ((valueDelivered * 100) - countPrice),
+          change: parseInt(parseInt(valueDelivered, 10) - (countPrice / 100), 10),
           observation: dataFoods[i].observation,
           quant: dataFoods[i].current,
         };
@@ -69,8 +76,7 @@ export default function Payment() {
       }
       setDisplay(true);
     } catch (err) {
-      if (err.response.status === 400) return toast.error('Insira seu nome e metodo de pagamento');
-      toast.error('Algo inesperado aconteceu');
+      toast.error(err.response.data.message);
     }
   }
 

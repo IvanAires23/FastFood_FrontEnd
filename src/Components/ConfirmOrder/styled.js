@@ -53,7 +53,7 @@ export const Order = styled.form`
 export const Revision = styled.div`
     width: 80%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     img{
         width: 120px;
         @media (max-width: 625px){
