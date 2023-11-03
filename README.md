@@ -44,16 +44,19 @@ The following tools and frameworks were used in the construction of the project:
 npm i
 ```
 
-5. Run the front-end with
+5. Change the database.js file link to http://localhost:4000
+
+
+6. Run the front-end with
 
 ```bash
 npm start
 ```
 
-6. You can optionally build the project running
+7. You can optionally build the project running
 
 ```bash
 npm run build
 ```
 
-7. Finally access http://localhost:3000 on your favorite browser
+8. Finally access http://localhost:3000 on your favorite browser
