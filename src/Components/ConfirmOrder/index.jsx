@@ -10,11 +10,13 @@ import {
   AddCar, AddSub, Buttons, Continue, Count, Obs, Order, Overlay, Revision,
 } from './styled';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 export default function ConfirmOrder(props) {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [totalAdds, setTotalAdds] = useState([]);
   const { current, setCurrent } = useContext(DataFood);
+  const navigate = useNavigate();
 
   const adds = [
     { name: 'Bacon', price: 100, qnt: '10g' },
@@ -32,7 +34,7 @@ export default function ConfirmOrder(props) {
     }
   }
 
-  function finishRequest(e) {
+  async function test(e) {
     props.setObservation('');
     e.preventDefault();
     setCurrent(1);
@@ -43,6 +45,11 @@ export default function ConfirmOrder(props) {
     props.setDisplay(false);
     setSelectedOptions([]);
     props.setObservation('');
+  }
+
+  async function finishRequest(e) {
+    await test(e);
+    navigate('/payment');
   }
 
   return (
