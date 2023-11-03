@@ -12,7 +12,7 @@ export default function Ready({ ready, requests }) {
     for (let i = 0; i < requests.length; i++) {
       if (food.id === requests[i].foodId) {
         await axios.post(`${DATABASE_URL}/kitchen/delete`, { id: requests[i].id })
-          .then(() => window.location.reload())
+          .then(() => toast.success('Pedido cancelado com sucesso'))
           .catch((err) => toast.error(err.response.data.message));
         return;
       }

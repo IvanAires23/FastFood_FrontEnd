@@ -22,7 +22,7 @@ export default function Kitchen() {
     axios.get(`${DATABASE_URL}/kitchen`)
       .then((res) => setRequests(res.data))
       .catch((err) => toast.error(err.response.data.message));
-  }, []);
+  }, [preparing, ready]);
 
   useEffect(() => {
     findFoodInKitchen();
@@ -55,7 +55,7 @@ export default function Kitchen() {
       <Container>
         <PreparingReady>
           <h1>Preparando:</h1>
-          <Preparing preparing={preparing} requests={requests} />
+          <Preparing setPreparing={setPreparing} preparing={preparing} requests={requests} />
         </PreparingReady>
         <Line />
         <PreparingReady>

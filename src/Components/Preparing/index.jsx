@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import DATABASE_URL from '../../database';
 import { toast } from 'react-toastify';
@@ -14,7 +14,7 @@ export default function Preparing({ preparing, requests }) {
     for (let i = 0; i < requests.length; i++) {
       if (food.id === requests[i].foodId) {
         await axios.post(`${DATABASE_URL}/kitchen/ready`, { id: requests[i].id })
-          .then(() => window.location.reload())
+          .then(() => toast.success('Pedido atualizado com sucesso'))
           .catch((err) => toast.error(err.response.data.message));
         return;
       }
@@ -25,7 +25,7 @@ export default function Preparing({ preparing, requests }) {
     for (let i = 0; i < requests.length; i++) {
       if (food.id === requests[i].foodId) {
         await axios.post(`${DATABASE_URL}/kitchen/delete`, { id: requests[i].id })
-          .then(() => window.location.reload())
+          .then(() => toast.success('Pedido cancelado com sucesso'))
           .catch((err) => toast.error(err.response.data.message));
         return;
       }
