@@ -14,7 +14,6 @@ export default function Ready({ setReload, ready }) {
       toast.success('Pedido atualizado com sucesso');
       setReload(true);
     } catch (err) {
-      console.log(err.response.data);
       toast.error(err.response.data.message);
     }
   }
