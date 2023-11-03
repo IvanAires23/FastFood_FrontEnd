@@ -48,6 +48,9 @@ export default function Payment() {
   }, [dataFoods]);
 
   async function finishRequest() {
+    if (!valueDelivered) {
+      setValueDelivered(countPrice);
+    }
     if (!parseInt(valueDelivered, 10)) {
       return toast.error('Valor definido é incorreto');
     } if (valueDelivered < (countPrice / 100)) {
@@ -69,11 +72,13 @@ export default function Payment() {
           change: parseInt(parseInt(valueDelivered, 10) - (countPrice / 100), 10),
           observation: dataFoods[i].observation,
           quant: dataFoods[i].current,
+          adds: dataFoods[i].totalAdds,
         };
         await axios.post(`${DATABASE_URL}/kitchen`, element);
       }
       setDisplay(true);
     } catch (err) {
+      if (Array.isArray(err.response.data)) return toast.error(err.response.data[0]);
       toast.error(err.response.data.message);
     }
   }
@@ -85,7 +90,6 @@ export default function Payment() {
       <Container>
         <h1>
           <BiSolidWalletAlt />
-          {' '}
           Pagamento
         </h1>
         <ResumePayment>
