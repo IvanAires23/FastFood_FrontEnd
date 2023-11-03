@@ -13,7 +13,6 @@ export default function Delivery() {
   const { setSelected } = useContext(DataFood);
 
   async function findFoodInKitchen() {
-    console.log('rodei');
     try {
       const foodsInPreparing = await axios.get(`${DATABASE_URL}/kitchen/preparing`);
       const foodsReadys = await axios.get(`${DATABASE_URL}/kitchen/ready`);
@@ -25,7 +24,7 @@ export default function Delivery() {
   }
 
   useEffect(() => {
-    setSelected('Cozinha');
+    setSelected('Retirada');
     findFoodInKitchen();
   }, []);
 
@@ -36,14 +35,14 @@ export default function Delivery() {
         <PreparingReady>
           <h1>Preparando:</h1>
           {preparing.map((n, i) => (
-            <h2 className="preparing" key={i}>{n}</h2>
+            <h2 className="preparing" key={i}>{n.nameUser}</h2>
           ))}
         </PreparingReady>
         <Line />
         <PreparingReady>
           <h1>Pronto:</h1>
           {ready.map((n, i) => (
-            <h2 className="ready" key={i}>{n}</h2>
+            <h2 className="ready" key={i}>{n.nameUser}</h2>
           ))}
         </PreparingReady>
       </Container>
