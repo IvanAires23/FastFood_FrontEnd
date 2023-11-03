@@ -75,6 +75,7 @@ export default function Payment() {
           adds: dataFoods[i].totalAdds,
         };
         await axios.post(`${DATABASE_URL}/kitchen`, element);
+        await axios.post(`${DATABASE_URL}/printer`, element);
       }
       setDisplay(true);
     } catch (err) {
