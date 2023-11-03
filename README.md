@@ -2,7 +2,7 @@
 
 FastFood is a fast food ordering application powered by React, designed to provide a quick and easy way to manage restaurant orders.
 
-<img src="./assets/2023-11-02-23-17-05.gif" />
+<img src="./assets/fastfood.gif" />
 
 Try it out now at: https://fast-food-front-end.vercel.app/
 
