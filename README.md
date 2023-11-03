@@ -2,7 +2,7 @@
 
 FastFood is a fast food ordering application powered by React, designed to provide a quick and easy way to manage restaurant orders.
 
-<img src="./assets/2023-11-02-23-17-05.gif" />
+<img src="./assets/fastfood.gif" />
 
 Try it out now at: https://fast-food-front-end.vercel.app/
 
@@ -44,16 +44,19 @@ The following tools and frameworks were used in the construction of the project:
 npm i
 ```
 
-5. Run the front-end with
+5. Change the database.js file link to http://localhost:4000
+
+
+6. Run the front-end with
 
 ```bash
 npm start
 ```
 
-6. You can optionally build the project running
+7. You can optionally build the project running
 
 ```bash
 npm run build
 ```
 
-7. Finally access http://localhost:3000 on your favorite browser
+8. Finally access http://localhost:3000 on your favorite browser
