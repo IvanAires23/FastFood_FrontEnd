@@ -74,7 +74,6 @@ export default function Payment() {
       }
       setDisplay(true);
     } catch (err) {
-      console.log(valueDelivered);
       toast.error(err.response.data.message);
     }
   }
