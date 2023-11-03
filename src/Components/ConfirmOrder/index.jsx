@@ -34,7 +34,7 @@ export default function ConfirmOrder(props) {
     }
   }
 
-  async function test(e) {
+  async function dataRequest(e) {
     props.setObservation('');
     e.preventDefault();
     setCurrent(1);
@@ -44,11 +44,14 @@ export default function ConfirmOrder(props) {
     props.setProductInCar(car);
     props.setDisplay(false);
     setSelectedOptions([]);
-    props.setObservation('');
+  }
+
+  async function continueRequest(e) {
+    await dataRequest(e);
   }
 
   async function finishRequest(e) {
-    await test(e);
+    await dataRequest(e);
     navigate('/payment');
   }
 
@@ -88,13 +91,13 @@ export default function ConfirmOrder(props) {
 
         <Obs>
           <h2>Observações</h2>
-          <textarea onChange={(e) => props.setObservation(e.target.value)} placeholder="Adicione uma observação ao pedido" />
+          <textarea onChange={(e) => props.setObservation(e.target.value)} value={props.observation} placeholder="Adicione uma observação ao pedido" />
         </Obs>
 
         <InfosRequest product={props.product} totalAdds={totalAdds} />
 
         <Buttons>
-          <Continue onClick={finishRequest}>Continuar adicionando</Continue>
+          <Continue onClick={(e) => continueRequest(e)}>Continuar adicionando</Continue>
           <AddCar onClick={finishRequest}>Finalizar Pedido</AddCar>
         </Buttons>
       </Order>

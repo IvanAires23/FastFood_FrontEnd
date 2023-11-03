@@ -80,7 +80,9 @@ export default function Home() {
   }
 
   function reload() {
-    window.location.reload();
+    setSelectFood(false);
+    setObservation('');
+    setProductInCar([]);
   }
 
   async function searchByCategory(_category) {
