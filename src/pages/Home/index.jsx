@@ -24,15 +24,20 @@ export default function Home() {
   const [checkFood, setCheckFood] = useState([]);
   const [display, setDisplay] = useState(false);
   const [productInCar, setProductInCar] = useState([]);
-  const [observation, setObservation] = useState();
+  const [observation, setObservation] = useState('');
   const Header = useContext(MenuHeader);
 
+  async function findAllFood() {
+    try {
+      const res = await axios.get(`${DATABASE_URL}/food`);
+      setFood(res.data);
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
+  }
+
   useEffect(() => {
-    axios.get(`${DATABASE_URL}/food`)
-      .then((res) => {
-        setFood(res.data);
-      })
-      .catch((err) => toast.error(err.response.data.message));
+    findAllFood();
   }, []);
 
   useEffect(() => {
@@ -59,20 +64,18 @@ export default function Home() {
     { name: 'Sobremesas', image: 'https://img.freepik.com/fotos-premium/uma-sobremesa-com-uma-colher-marrom-em-um-prato-com-fundo-branco_391229-6166.jpg?w=826' },
   ];
 
-  function send(e) {
-    if (e.key === 'Enter') {
+  async function send(e) {
+    try {
       if (searchFood === '') {
-        return axios.get(`${DATABASE_URL}/food`)
-          .then((res) => {
-            setFood(res.data);
-          })
-          .catch((err) => toast.error(err.response.data.message));
+        const res = await axios.get(`${DATABASE_URL}/food`);
+        setFood(res.data);
+      } else if (e.key === 'Enter') {
+        const res = await axios.post(`${DATABASE_URL}/food`, { code: searchFood });
+        setFood(res.data);
       }
-      axios.post(`${DATABASE_URL}/food`, { code: searchFood })
-        .then((res) => setFood(res.data))
-        .catch(() => {
-          toast.error('Não encontrado');
-        });
+    } catch (err) {
+      if (err.response.status === 404) return toast.error('Não encontrado');
+      toast.error(err.response.data.message);
     }
   }
 
@@ -80,19 +83,23 @@ export default function Home() {
     window.location.reload();
   }
 
-  function searchByCategory(_category) {
-    if (_category === 'Combos') {
-      axios.post(`${DATABASE_URL}/food/category`, { category: 'COMBOS' })
-        .then((res) => setFood(res.data)).catch(() => toast.error('Não encontrado'));
-    } else if (_category === 'Acompanhamentos') {
-      axios.post(`${DATABASE_URL}/food/category`, { category: 'FOLLOWUP' })
-        .then((res) => setFood(res.data)).catch(() => toast.error('Não encontrado'));
-    } else if (_category === 'Bebidas') {
-      axios.post(`${DATABASE_URL}/food/category`, { category: 'DRINKS' })
-        .then((res) => setFood(res.data)).catch(() => toast.error('Não encontrado'));
-    } else {
-      axios.post(`${DATABASE_URL}/food/category`, { category: 'DESSERTS' })
-        .then((res) => setFood(res.data)).catch(() => toast.error('Não encontrado'));
+  async function searchByCategory(_category) {
+    try {
+      if (_category === 'Combos') {
+        const res = await axios.post(`${DATABASE_URL}/food/category`, { category: 'COMBOS' });
+        setFood(res.data);
+      } else if (_category === 'Acompanhamentos') {
+        const res = await axios.post(`${DATABASE_URL}/food/category`, { category: 'FOLLOWUP' });
+        setFood(res.data);
+      } else if (_category === 'Bebidas') {
+        const res = await axios.post(`${DATABASE_URL}/food/category`, { category: 'DRINKS' });
+        setFood(res.data);
+      } else {
+        const res = await axios.post(`${DATABASE_URL}/food/category`, { category: 'DESSERTS' });
+        setFood(res.data);
+      }
+    } catch (err) {
+      toast.error('Não encontrado');
     }
   }
 

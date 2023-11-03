@@ -33,6 +33,7 @@ export default function ConfirmOrder(props) {
   }
 
   function finishRequest(e) {
+    props.setObservation('');
     e.preventDefault();
     setCurrent(1);
     const car = [...props.productInCar, {
@@ -41,6 +42,7 @@ export default function ConfirmOrder(props) {
     props.setProductInCar(car);
     props.setDisplay(false);
     setSelectedOptions([]);
+    props.setObservation('');
   }
 
   return (
