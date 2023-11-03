@@ -11,7 +11,7 @@ export default function Ready({ setReload, ready }) {
   async function deleteKitchen(id) {
     try {
       await axios.post(`${DATABASE_URL}/kitchen/delete`, { id });
-      toast.success('Pedido atualizado com sucesso');
+      toast.success('Pedido deletado com sucesso');
       setReload(true);
     } catch (err) {
       toast.error(err.response.data.message);
