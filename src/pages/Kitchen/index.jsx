@@ -11,39 +11,24 @@ import Preparing from '../../Components/Preparing';
 import Ready from '../../Components/Ready';
 
 export default function Kitchen() {
-  const [requests, setRequests] = useState([]);
   const [preparing, setPreparing] = useState([]);
   const [ready, setReady] = useState([]);
+  const [reload, setReload] = useState(true);
   const Header = useContext(MenuHeader);
   const { setSelected } = useContext(DataFood);
 
   useEffect(() => {
     setSelected('Cozinha');
-    axios.get(`${DATABASE_URL}/kitchen`)
-      .then((res) => setRequests(res.data))
-      .catch((err) => toast.error(err.response.data.message));
-  }, [preparing, ready]);
-
-  useEffect(() => {
     findFoodInKitchen();
-  }, [requests]);
+  }, [reload]);
 
   async function findFoodInKitchen() {
+    setReload(false);
     try {
-      const foodsInPreparing = [];
-      const foodsReadys = [];
-      for (let i = 0; i < requests.length; i++) {
-        const element = requests[i];
-        if (element.preparation === 'PREPARING') {
-          const food = await axios.get(`${DATABASE_URL}/kitchen/${element.foodId}`);
-          foodsInPreparing.push(food.data);
-        } else if (element.preparation === 'READY') {
-          const food = await axios.get(`${DATABASE_URL}/kitchen/${element.foodId}`);
-          foodsReadys.push(food.data);
-        }
-      }
-      setPreparing(foodsInPreparing);
-      setReady(foodsReadys);
+      const foodsInPreparing = await axios.get(`${DATABASE_URL}/kitchen/preparing`);
+      const foodsReadys = await axios.get(`${DATABASE_URL}/kitchen/ready`);
+      setPreparing(foodsInPreparing.data);
+      setReady(foodsReadys.data);
     } catch (err) {
       toast.error(err.response.data.message);
     }
@@ -55,12 +40,18 @@ export default function Kitchen() {
       <Container>
         <PreparingReady>
           <h1>Preparando:</h1>
-          <Preparing setPreparing={setPreparing} preparing={preparing} requests={requests} />
+          <Preparing
+            setReload={setReload}
+            preparing={preparing}
+          />
         </PreparingReady>
         <Line />
         <PreparingReady>
           <h1>Pronto:</h1>
-          <Ready ready={ready} requests={requests} />
+          <Ready
+            setReload={setReload}
+            ready={ready}
+          />
         </PreparingReady>
 
         <ToastContainer />

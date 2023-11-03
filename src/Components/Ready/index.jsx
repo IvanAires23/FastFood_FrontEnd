@@ -7,38 +7,38 @@ import {
   Box, Cancel, Infos, Obs, ReadyOrCancel,
 } from './styled';
 
-export default function Ready({ ready, requests }) {
-  async function deleteKitchen(food) {
-    for (let i = 0; i < requests.length; i++) {
-      if (food.id === requests[i].foodId) {
-        await axios.post(`${DATABASE_URL}/kitchen/delete`, { id: requests[i].id })
-          .then(() => toast.success('Pedido cancelado com sucesso'))
-          .catch((err) => toast.error(err.response.data.message));
-        return;
-      }
+export default function Ready({ setReload, ready }) {
+  async function deleteKitchen(id) {
+    try {
+      await axios.post(`${DATABASE_URL}/kitchen/delete`, { id });
+      toast.success('Pedido atualizado com sucesso');
+      setReload(true);
+    } catch (err) {
+      console.log(err.response.data);
+      toast.error(err.response.data.message);
     }
   }
 
   return (
     <>
-      {ready.length === 0 || requests.length === 0 ? 'Sem pedidos prontos no momento' : ready.map((r, i) => (
+      {ready.length === 0 ? 'Sem pedidos prontos no momento' : ready.map((r, i) => (
         <Box key={i}>
           <Infos>
-            <img src={r.image} />
+            <img src={r.Food.image} />
             <div>
-              <h1>{`${r.code} - ${requests[i].nameUser}`}</h1>
-              <p>{`${requests[i].quant}x ${r.name}`}</p>
+              <h1>{`${r.Food.code} - ${r.nameUser}`}</h1>
+              <p>{`${r.quant}x ${r.Food.name}`}</p>
             </div>
             <ReadyOrCancel>
-              <Cancel onClick={() => deleteKitchen(r)}><AiOutlineClose /></Cancel>
+              <Cancel onClick={() => deleteKitchen(r.id)}><AiOutlineClose /></Cancel>
             </ReadyOrCancel>
           </Infos>
-          {requests[i].observation && (
+          { r.observation && (
           <Obs>
             <h2>Observações</h2>
-            <textarea placeholder={requests[i].observation} disabled />
+            <textarea placeholder={r.observation} disabled />
           </Obs>
-          ) }
+          )}
         </Box>
       ))}
     </>

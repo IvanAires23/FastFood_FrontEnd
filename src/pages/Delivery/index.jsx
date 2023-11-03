@@ -7,36 +7,27 @@ import DATABASE_URL from '../../database';
 import { toast } from 'react-toastify';
 
 export default function Delivery() {
-  const [requests, setRequests] = useState([]);
   const [preparing, setPreparing] = useState([]);
   const [ready, setReady] = useState([]);
   const Header = useContext(MenuHeader);
   const { setSelected } = useContext(DataFood);
 
-  useEffect(() => {
-    setSelected('Retirada');
-    axios.get(`${DATABASE_URL}/kitchen`)
-      .then((res) => setRequests(res.data))
-      .catch((err) => toast.error(err.response.data.message));
-  }, []);
-
-  // eslint-disable-next-line no-use-before-define
-  useEffect(() => findNamesInKitchen(), [requests]);
-
-  function findNamesInKitchen() {
-    const namesPreparing = [];
-    const namesReady = [];
-    for (let i = 0; i < requests.length; i++) {
-      if (requests[i].preparation === 'PREPARING') {
-        namesPreparing.push(requests[i].nameUser);
-      } else {
-        namesReady.push(requests[i].nameUser);
-      }
+  async function findFoodInKitchen() {
+    console.log('rodei');
+    try {
+      const foodsInPreparing = await axios.get(`${DATABASE_URL}/kitchen/preparing`);
+      const foodsReadys = await axios.get(`${DATABASE_URL}/kitchen/ready`);
+      setPreparing(foodsInPreparing.data);
+      setReady(foodsReadys.data);
+    } catch (err) {
+      toast.error(err.response.data.message);
     }
-
-    setPreparing(namesPreparing);
-    setReady(namesReady);
   }
+
+  useEffect(() => {
+    setSelected('Cozinha');
+    findFoodInKitchen();
+  }, []);
 
   return (
     <>

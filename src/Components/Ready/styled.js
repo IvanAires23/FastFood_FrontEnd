@@ -8,7 +8,7 @@ export const Box = styled.div`
     margin-top: 20px;
     @media (max-width: 1030px){
         width: 60%;
-        height: 500px;
+        height: 300px;
     }
     
 `;
